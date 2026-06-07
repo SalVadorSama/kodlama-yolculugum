@@ -22,364 +22,108 @@
   --text2: #4a4a6a;
   --muted: #9999b5;
   --font: 'Nunito', sans-serif;
-  --font2: 'Nunito Sans', sans-serif;
   --radius: 16px;
   --radius-sm: 10px;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font);
-  min-height: 100vh;
-  padding-bottom: 90px;
-}
-
-.container { max-width: 480px; margin: 0 auto; padding: 0 16px; }
-
-/* HEADER */
-.header {
-  padding: 28px 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.logo { font-size: 20px; font-weight: 700; color: var(--text); }
-.logo span { color: var(--accent); }
-.level-badge {
-  background: var(--accent-light);
-  color: var(--accent);
-  border-radius: 99px;
-  padding: 5px 14px;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-/* XP BAR */
-.xp-card {
-  background: var(--surface);
-  border-radius: var(--radius);
-  padding: 16px 18px;
-  margin-bottom: 14px;
-  border: 1px solid var(--border);
-}
-.xp-top { display: flex; justify-content: space-between; margin-bottom: 10px; }
-.xp-label { font-size: 13px; color: var(--muted); font-weight: 500; }
-.xp-val { font-size: 13px; color: var(--accent); font-weight: 600; }
-.xp-track { height: 8px; background: var(--bg); border-radius: 99px; overflow: hidden; }
-.xp-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  border-radius: 99px;
-  transition: width 0.8s cubic-bezier(.4,0,.2,1);
-}
-
-/* STATS */
-.stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
-.stat {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 14px 10px;
-  text-align: center;
-}
-.stat-num { font-size: 24px; font-weight: 700; color: var(--text); line-height: 1; }
-.stat-num.purple { color: var(--accent); }
-.stat-num.green { color: var(--accent3); }
-.stat-num.pink { color: var(--accent2); }
-.stat-lbl { font-size: 11px; color: var(--muted); margin-top: 4px; font-weight: 500; }
-
-/* WEEK */
-.week-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px 18px;
-  margin-bottom: 14px;
-}
-.section-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--muted);
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.week-strip { display: flex; justify-content: space-between; }
-.day-item { display: flex; flex-direction: column; align-items: center; gap: 5px; }
-.day-circle {
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  border: 1.5px solid var(--border2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--muted);
-  transition: all .2s;
-  background: var(--surface2);
-}
-.day-circle.done { background: var(--accent3); border-color: var(--accent3); color: #fff; }
-.day-circle.today { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
-.day-lbl { font-size: 10px; color: var(--muted); font-weight: 500; }
-
-/* TABS */
-.tabs {
-  display: flex; gap: 4px;
-  background: var(--surface);
-  border-radius: var(--radius-sm);
-  padding: 4px;
-  margin-bottom: 14px;
-  border: 1px solid var(--border);
-}
-.tab {
-  flex: 1; padding: 9px 4px;
-  text-align: center;
-  font-size: 12px;
-  font-weight: 600;
-  font-family: var(--font);
-  color: var(--muted);
-  cursor: pointer;
-  border-radius: 7px;
-  border: none;
-  background: transparent;
-  transition: all .2s;
-}
-.tab.active {
-  background: var(--accent);
-  color: #fff;
-}
-
-.tab-content { display: none; }
-.tab-content.active { display: block; }
-
-/* TASK CARD */
-.task-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  margin-bottom: 12px;
-}
-.task-head {
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text2);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.head-dot { width: 8px; height: 8px; border-radius: 50%; }
-.task-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 13px 16px;
-  border-bottom: 1px solid var(--border);
-  cursor: pointer;
-  transition: background .15s;
-  -webkit-tap-highlight-color: transparent;
-}
-.task-item:last-child { border-bottom: none; }
-.task-item:hover { background: var(--surface2); }
-.check {
-  width: 24px; height: 24px;
-  border-radius: 50%;
-  border: 2px solid var(--border2);
-  flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  transition: all .2s;
-  font-size: 13px;
-  background: var(--surface2);
-}
-.check.done { background: var(--accent3); border-color: var(--accent3); color: #fff; }
-.task-txt { flex: 1; font-size: 13px; font-weight: 400; color: var(--text); line-height: 1.5; }
-.task-txt.done { color: var(--muted); text-decoration: line-through; }
-.task-xp {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--accent);
-  background: var(--accent-light);
-  padding: 3px 8px;
-  border-radius: 99px;
-  white-space: nowrap;
-}
-.task-xp.pink { color: var(--accent2); background: var(--accent2-light); }
-.task-xp.green { color: var(--accent3); background: var(--accent3-light); }
-
-/* UNLOCK BANNER */
-.unlock-banner {
-  background: linear-gradient(135deg, var(--accent-light), var(--accent2-light));
-  border: 1px solid rgba(108,99,255,0.2);
-  border-radius: var(--radius);
-  padding: 16px 18px;
-  margin-bottom: 12px;
-  display: none;
-  text-align: center;
-}
-.unlock-banner.show { display: block; }
-.unlock-banner h3 { font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
-.unlock-banner p { font-size: 12px; color: var(--text2); }
-
-/* EXTRA TASKS (hidden until unlocked) */
-.extra-tasks { display: none; }
-.extra-tasks.unlocked { display: block; }
-
-/* PHASE */
-.phase {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  margin-bottom: 10px;
-  overflow: hidden;
-}
-.phase-h {
-  padding: 14px 16px;
-  display: flex; align-items: center; gap: 10px;
-  cursor: pointer;
-  transition: background .15s;
-  -webkit-tap-highlight-color: transparent;
-}
-.phase-h:hover { background: var(--surface2); }
-.phase-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.phase-name { flex: 1; font-size: 14px; font-weight: 600; color: var(--text); }
-.phase-tag { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 99px; }
-.phase-body { display: none; padding: 4px 16px 14px; border-top: 1px solid var(--border); }
-.phase-body.open { display: block; }
-.week-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
-.week-item:last-of-type { border-bottom: none; }
-.week-n { font-size: 11px; font-weight: 600; color: var(--muted); min-width: 58px; padding-top: 2px; }
-.week-t { font-size: 13px; color: var(--text2); line-height: 1.5; }
-.phase-win { margin-top: 10px; font-size: 12px; font-weight: 600; color: var(--accent3); }
-
-/* TOOLS */
-.tool {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  text-decoration: none;
-  transition: all .2s;
-  -webkit-tap-highlight-color: transparent;
-}
-.tool:hover { border-color: rgba(108,99,255,0.3); background: var(--surface2); transform: translateY(-1px); }
-.tool-ico { font-size: 24px; width: 40px; text-align: center; flex-shrink: 0; }
-.tool-name { font-size: 14px; font-weight: 600; color: var(--text); }
-.tool-desc { font-size: 12px; color: var(--muted); margin-top: 2px; }
-.tool-arrow { color: var(--muted); font-size: 18px; margin-left: auto; }
-
-/* NOTES */
-.note-area {
-  width: 100%;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  color: var(--text);
-  font-family: var(--font);
-  font-size: 14px;
-  resize: none;
-  height: 120px;
-  margin-bottom: 8px;
-  outline: none;
-  line-height: 1.6;
-}
-.note-area:focus { border-color: rgba(108,99,255,0.4); }
-.note-area::placeholder { color: var(--muted); }
-.save-btn {
-  width: 100%;
-  padding: 13px;
-  background: var(--accent);
-  border: none;
-  border-radius: var(--radius-sm);
-  color: #fff;
-  font-family: var(--font);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all .2s;
-}
-.save-btn:hover { background: #5a52e0; }
-.save-btn:active { transform: scale(.98); }
-.note-entry {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 12px 14px;
-  margin-top: 8px;
-  font-size: 13px;
-  color: var(--text);
-  line-height: 1.6;
-}
-.note-date { font-size: 11px; font-weight: 600; color: var(--muted); margin-bottom: 5px; }
-
-/* BOTTOM NAV */
-.bottom-nav {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--border);
-  display: flex;
-  padding: 8px 0 18px;
-  z-index: 100;
-}
-.nav-item {
-  flex: 1;
-  display: flex; flex-direction: column; align-items: center; gap: 3px;
-  cursor: pointer;
-  padding: 6px 0;
-  -webkit-tap-highlight-color: transparent;
-}
-.nav-ico { font-size: 22px; }
-.nav-lbl { font-size: 10px; font-weight: 600; color: var(--muted); transition: color .2s; }
-.nav-item.active .nav-lbl { color: var(--accent); }
-
-/* TOAST */
-.toast {
-  position: fixed;
-  bottom: 85px;
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  background: var(--text);
-  color: #fff;
-  font-family: var(--font);
-  font-size: 13px;
-  font-weight: 600;
-  padding: 10px 20px;
-  border-radius: 99px;
-  opacity: 0;
-  transition: all .3s;
-  pointer-events: none;
-  white-space: nowrap;
-  z-index: 200;
-}
-.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-@keyframes fall {
-  to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-}
-.confetti-piece {
-  position: fixed; width: 8px; height: 8px; border-radius: 2px;
-  animation: fall linear forwards; pointer-events: none; z-index: 300;
-}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;padding-bottom:90px;}
+.container{max-width:480px;margin:0 auto;padding:0 16px;}
+.header{padding:28px 0 16px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-size:20px;font-weight:700;color:var(--text);}
+.logo span{color:var(--accent);}
+.level-badge{background:var(--accent-light);color:var(--accent);border-radius:99px;padding:5px 14px;font-size:13px;font-weight:600;}
+.xp-card{background:var(--surface);border-radius:var(--radius);padding:16px 18px;margin-bottom:14px;border:1px solid var(--border);}
+.xp-top{display:flex;justify-content:space-between;margin-bottom:10px;}
+.xp-label{font-size:13px;color:var(--muted);font-weight:500;}
+.xp-val{font-size:13px;color:var(--accent);font-weight:600;}
+.xp-track{height:8px;background:var(--bg);border-radius:99px;overflow:hidden;}
+.xp-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;transition:width 0.8s cubic-bezier(.4,0,.2,1);}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 10px;text-align:center;}
+.stat-num{font-size:24px;font-weight:700;color:var(--text);line-height:1;}
+.stat-num.purple{color:var(--accent);}
+.stat-num.green{color:var(--accent3);}
+.stat-num.pink{color:var(--accent2);}
+.stat-lbl{font-size:11px;color:var(--muted);margin-top:4px;font-weight:500;}
+.week-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:14px;}
+.section-label{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;}
+.week-strip{display:flex;justify-content:space-between;}
+.day-item{display:flex;flex-direction:column;align-items:center;gap:5px;}
+.day-circle{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--muted);transition:all .2s;background:var(--surface2);}
+.day-circle.done{background:var(--accent3);border-color:var(--accent3);color:#fff;}
+.day-circle.today{border-color:var(--accent);color:var(--accent);background:var(--accent-light);}
+.day-lbl{font-size:10px;color:var(--muted);font-weight:500;}
+.tabs{display:flex;gap:4px;background:var(--surface);border-radius:var(--radius-sm);padding:4px;margin-bottom:14px;border:1px solid var(--border);}
+.tab{flex:1;padding:9px 4px;text-align:center;font-size:12px;font-weight:600;font-family:var(--font);color:var(--muted);cursor:pointer;border-radius:7px;border:none;background:transparent;transition:all .2s;}
+.tab.active{background:var(--accent);color:#fff;}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+.day-header{background:var(--accent-light);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;}
+.day-title{font-size:14px;font-weight:700;color:var(--accent);}
+.day-sub{font-size:11px;color:var(--text2);font-weight:500;}
+.task-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:12px;}
+.task-head{padding:12px 16px;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:8px;}
+.head-dot{width:8px;height:8px;border-radius:50%;}
+.task-item{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;-webkit-tap-highlight-color:transparent;}
+.task-item:last-child{border-bottom:none;}
+.task-item:hover{background:var(--surface2);}
+.check{width:24px;height:24px;border-radius:50%;border:2px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:13px;background:var(--surface2);}
+.check.done{background:var(--accent3);border-color:var(--accent3);color:#fff;}
+.task-txt{flex:1;font-size:13px;font-weight:400;color:var(--text);line-height:1.5;}
+.task-txt.done{color:var(--muted);text-decoration:line-through;}
+.task-xp{font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-light);padding:3px 8px;border-radius:99px;white-space:nowrap;}
+.task-xp.pink{color:var(--accent2);background:var(--accent2-light);}
+.task-xp.green{color:var(--accent3);background:var(--accent3-light);}
+.unlock-banner{background:linear-gradient(135deg,var(--accent-light),var(--accent2-light));border:1px solid rgba(108,99,255,0.2);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px;display:none;text-align:center;}
+.unlock-banner.show{display:block;}
+.unlock-banner h3{font-size:15px;font-weight:700;color:var(--accent);margin-bottom:4px;}
+.unlock-banner p{font-size:12px;color:var(--text2);}
+.extra-tasks{display:none;}
+.extra-tasks.unlocked{display:block;}
+.phase{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;}
+.phase-h{padding:14px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:background .15s;}
+.phase-h:hover{background:var(--surface2);}
+.phase-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.phase-name{flex:1;font-size:14px;font-weight:600;color:var(--text);}
+.phase-tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:99px;}
+.phase-body{display:none;padding:4px 16px 14px;border-top:1px solid var(--border);}
+.phase-body.open{display:block;}
+.week-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
+.week-item:last-of-type{border-bottom:none;}
+.week-n{font-size:11px;font-weight:600;color:var(--muted);min-width:58px;padding-top:2px;}
+.week-t{font-size:13px;color:var(--text2);line-height:1.5;}
+.phase-win{margin-top:10px;font-size:12px;font-weight:600;color:var(--accent3);}
+.tool{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:8px;display:flex;align-items:center;gap:14px;text-decoration:none;transition:all .2s;}
+.tool:hover{border-color:rgba(108,99,255,0.3);background:var(--surface2);transform:translateY(-1px);}
+.tool-ico{font-size:24px;width:40px;text-align:center;flex-shrink:0;}
+.tool-name{font-size:14px;font-weight:600;color:var(--text);}
+.tool-desc{font-size:12px;color:var(--muted);margin-top:2px;}
+.tool-arrow{color:var(--muted);font-size:18px;margin-left:auto;}
+.note-area{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;color:var(--text);font-family:var(--font);font-size:14px;resize:none;height:120px;margin-bottom:8px;outline:none;line-height:1.6;}
+.note-area:focus{border-color:rgba(108,99,255,0.4);}
+.note-area::placeholder{color:var(--muted);}
+.save-btn{width:100%;padding:13px;background:var(--accent);border:none;border-radius:var(--radius-sm);color:#fff;font-family:var(--font);font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;}
+.save-btn:hover{background:#5a52e0;}
+.save-btn:active{transform:scale(.98);}
+.note-entry{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;margin-top:8px;font-size:13px;color:var(--text);line-height:1.6;}
+.note-date{font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-top:1px solid var(--border);display:flex;padding:8px 0 18px;z-index:100;}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:6px 0;-webkit-tap-highlight-color:transparent;}
+.nav-ico{font-size:22px;}
+.nav-lbl{font-size:10px;font-weight:600;color:var(--muted);transition:color .2s;}
+.nav-item.active .nav-lbl{color:var(--accent);}
+.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--text);color:#fff;font-family:var(--font);font-size:13px;font-weight:600;padding:10px 20px;border-radius:99px;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;z-index:200;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+@keyframes fall{to{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+.confetti-piece{position:fixed;width:8px;height:8px;border-radius:2px;animation:fall linear forwards;pointer-events:none;z-index:300;}
 </style>
 </head>
 <body>
-
 <div class="container">
   <div class="header">
     <div class="logo">Serkut<span>'un Kod Yolculuğu</span></div>
     <div class="level-badge" id="level-badge">Seviye 1</div>
   </div>
-
-  <!-- XP -->
   <div class="xp-card">
     <div class="xp-top">
       <span class="xp-label">Deneyim Puanı</span>
@@ -387,24 +131,11 @@ body {
     </div>
     <div class="xp-track"><div class="xp-fill" id="xp-fill" style="width:0%"></div></div>
   </div>
-
-  <!-- STATS -->
   <div class="stat-row">
-    <div class="stat">
-      <div class="stat-num pink" id="s-streak">0</div>
-      <div class="stat-lbl">🔥 Seri</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num green" id="s-done">0</div>
-      <div class="stat-lbl">✓ Görev</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num purple" id="s-xp">0</div>
-      <div class="stat-lbl">★ Toplam XP</div>
-    </div>
+    <div class="stat"><div class="stat-num pink" id="s-streak">0</div><div class="stat-lbl">🔥 Seri</div></div>
+    <div class="stat"><div class="stat-num green" id="s-done">0</div><div class="stat-lbl">✓ Görev</div></div>
+    <div class="stat"><div class="stat-num purple" id="s-xp">0</div><div class="stat-lbl">★ Toplam XP</div></div>
   </div>
-
-  <!-- TABS -->
   <div class="tabs">
     <button class="tab active" onclick="switchTab('bugun',this)">Bugün</button>
     <button class="tab" onclick="switchTab('harita',this)">Harita</button>
@@ -414,97 +145,34 @@ body {
 
   <!-- BUGÜN -->
   <div class="tab-content active" id="tab-bugun">
-
-    <!-- WEEK -->
     <div class="week-card">
       <div class="section-label">Bu Hafta</div>
       <div class="week-strip" id="week-strip"></div>
     </div>
-
-    <div class="section-label">Günlük Görevler</div>
-    <div class="task-card">
-      <div class="task-head">
-        <div class="head-dot" style="background:var(--accent)"></div>
-        Hafta 1, Gün 1 — HTML nedir?
+    <div class="day-header">
+      <div>
+        <div class="day-title" id="day-title">Hafta 1, Gün 1</div>
+        <div class="day-sub" id="day-sub">HTML'e Giriş</div>
       </div>
-      <div class="task-item" onclick="toggleTask(this,20,'html-video')">
-        <div class="check" id="chk-html-video"></div>
-        <div class="task-txt" id="txt-html-video">FreeCodeCamp'te ilk dersi aç, HTML giriş videosunu izle (15 dk)</div>
-        <div class="task-xp">+20 XP</div>
-      </div>
-      <div class="task-item" onclick="toggleTask(this,25,'html-kod')">
-        <div class="check" id="chk-html-kod"></div>
-        <div class="task-txt" id="txt-html-kod">İlk &lt;h1&gt; ve &lt;p&gt; etiketlerini CodePen'de yaz, gör</div>
-        <div class="task-xp">+25 XP</div>
-      </div>
-      <div class="task-item" onclick="toggleTask(this,15,'html-not')">
-        <div class="check" id="chk-html-not"></div>
-        <div class="task-txt" id="txt-html-not">Bugün öğrendiklerini Notlar sekmesine yaz</div>
-        <div class="task-xp">+15 XP</div>
-      </div>
+      <div style="font-size:22px" id="day-emoji">🌱</div>
     </div>
-
-    <!-- UNLOCK BANNER -->
+    <div class="section-label">Günlük Görevler</div>
+    <div class="task-card" id="daily-tasks-card"></div>
     <div class="unlock-banner" id="unlock-banner">
       <h3>🎉 Günlük görevler tamamlandı!</h3>
       <p>Ekstra dersler ve proje görevi açıldı — devam et!</p>
     </div>
-
-    <!-- EXTRA: DERS -->
     <div class="extra-tasks" id="extra-tasks">
       <div class="section-label">Ekstra Dersler</div>
-      <div class="task-card">
-        <div class="task-head">
-          <div class="head-dot" style="background:var(--accent2)"></div>
-          Derinleştirme Dersleri
-        </div>
-        <div class="task-item" onclick="toggleTask(this,30,'extra-link')">
-          <div class="check" id="chk-extra-link"></div>
-          <div class="task-txt" id="txt-extra-link">HTML link ve görsel etiketlerini öğren (&lt;a&gt;, &lt;img&gt;)</div>
-          <div class="task-xp pink">+30 XP</div>
-        </div>
-        <div class="task-item" onclick="toggleTask(this,30,'extra-liste')">
-          <div class="check" id="chk-extra-liste"></div>
-          <div class="task-txt" id="txt-extra-liste">Liste etiketleri (&lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;) ile içerik yap</div>
-          <div class="task-xp pink">+30 XP</div>
-        </div>
-        <div class="task-item" onclick="toggleTask(this,40,'extra-css')">
-          <div class="check" id="chk-extra-css"></div>
-          <div class="task-txt" id="txt-extra-css">CSS nedir? İlk &lt;style&gt; ile renk ve font değiştir</div>
-          <div class="task-xp pink">+40 XP</div>
-        </div>
-      </div>
-
+      <div class="task-card" id="extra-tasks-card"></div>
       <div class="section-label">Proje Görevi</div>
-      <div class="task-card">
-        <div class="task-head">
-          <div class="head-dot" style="background:var(--accent3)"></div>
-          Mini Proje — Kendin Hakkında Sayfa
-        </div>
-        <div class="task-item" onclick="toggleTask(this,50,'proje-yapi')">
-          <div class="check" id="chk-proje-yapi"></div>
-          <div class="task-txt" id="txt-proje-yapi">İsmin, hobiler ve "Hakkımda" bölümü olan HTML sayfası yap</div>
-          <div class="task-xp green">+50 XP</div>
-        </div>
-        <div class="task-item" onclick="toggleTask(this,60,'proje-stil')">
-          <div class="check" id="chk-proje-stil"></div>
-          <div class="task-txt" id="txt-proje-stil">Sayfana CSS ile renk, font ve arka plan rengi ekle</div>
-          <div class="task-xp green">+60 XP</div>
-        </div>
-        <div class="task-item" onclick="toggleTask(this,80,'proje-github')">
-          <div class="check" id="chk-proje-github"></div>
-          <div class="task-txt" id="txt-proje-github">Projeyi GitHub'a yükle ve linki buraya not olarak kaydet</div>
-          <div class="task-xp green">+80 XP</div>
-        </div>
-      </div>
+      <div class="task-card" id="project-tasks-card"></div>
     </div>
-
   </div>
 
-  <!-- HARITA -->
+  <!-- HARİTA -->
   <div class="tab-content" id="tab-harita">
     <div class="section-label">12 Aylık Yol Haritası</div>
-
     <div class="phase">
       <div class="phase-h" onclick="togglePhase(this)">
         <div class="phase-dot" style="background:var(--accent)"></div>
@@ -520,7 +188,6 @@ body {
         <div class="phase-win">🏆 Proje: Kişisel portfolio sitesi</div>
       </div>
     </div>
-
     <div class="phase">
       <div class="phase-h" onclick="togglePhase(this)">
         <div class="phase-dot" style="background:var(--accent3)"></div>
@@ -534,7 +201,6 @@ body {
         <div class="phase-win">🏆 Proje: React web uygulaması</div>
       </div>
     </div>
-
     <div class="phase">
       <div class="phase-h" onclick="togglePhase(this)">
         <div class="phase-dot" style="background:var(--accent2)"></div>
@@ -553,31 +219,11 @@ body {
   <!-- ARAÇLAR -->
   <div class="tab-content" id="tab-araclar">
     <div class="section-label">Araçların</div>
-    <a class="tool" href="https://www.freecodecamp.org" target="_blank">
-      <div class="tool-ico">🎓</div>
-      <div><div class="tool-name">FreeCodeCamp</div><div class="tool-desc">Ana öğrenme platformun — ücretsiz</div></div>
-      <div class="tool-arrow">→</div>
-    </a>
-    <a class="tool" href="https://codepen.io" target="_blank">
-      <div class="tool-ico">✏️</div>
-      <div><div class="tool-name">CodePen</div><div class="tool-desc">Tarayıcıda anında kod yaz, gör</div></div>
-      <div class="tool-arrow">→</div>
-    </a>
-    <a class="tool" href="https://code.visualstudio.com" target="_blank">
-      <div class="tool-ico">💻</div>
-      <div><div class="tool-name">VS Code</div><div class="tool-desc">Profesyonel kod editörü — ücretsiz</div></div>
-      <div class="tool-arrow">→</div>
-    </a>
-    <a class="tool" href="https://github.com" target="_blank">
-      <div class="tool-ico">🐙</div>
-      <div><div class="tool-name">GitHub</div><div class="tool-desc">Projelerini sakla ve paylaş</div></div>
-      <div class="tool-arrow">→</div>
-    </a>
-    <a class="tool" href="https://developer.mozilla.org/tr" target="_blank">
-      <div class="tool-ico">📖</div>
-      <div><div class="tool-name">MDN Docs</div><div class="tool-desc">HTML/CSS/JS referansı — Türkçe</div></div>
-      <div class="tool-arrow">→</div>
-    </a>
+    <a class="tool" href="https://www.freecodecamp.org" target="_blank"><div class="tool-ico">🎓</div><div><div class="tool-name">FreeCodeCamp</div><div class="tool-desc">Ana öğrenme platformun — ücretsiz</div></div><div class="tool-arrow">→</div></a>
+    <a class="tool" href="https://codepen.io" target="_blank"><div class="tool-ico">✏️</div><div><div class="tool-name">CodePen</div><div class="tool-desc">Tarayıcıda anında kod yaz, gör</div></div><div class="tool-arrow">→</div></a>
+    <a class="tool" href="https://code.visualstudio.com" target="_blank"><div class="tool-ico">💻</div><div><div class="tool-name">VS Code</div><div class="tool-desc">Profesyonel kod editörü — ücretsiz</div></div><div class="tool-arrow">→</div></a>
+    <a class="tool" href="https://github.com" target="_blank"><div class="tool-ico">🐙</div><div><div class="tool-name">GitHub</div><div class="tool-desc">Projelerini sakla ve paylaş</div></div><div class="tool-arrow">→</div></a>
+    <a class="tool" href="https://developer.mozilla.org/tr" target="_blank"><div class="tool-ico">📖</div><div><div class="tool-name">MDN Docs</div><div class="tool-desc">HTML/CSS/JS referansı — Türkçe</div></div><div class="tool-arrow">→</div></a>
   </div>
 
   <!-- NOTLAR -->
@@ -589,46 +235,176 @@ body {
   </div>
 </div>
 
-<!-- BOTTOM NAV -->
 <div class="bottom-nav">
-  <div class="nav-item active" id="nav-bugun" onclick="switchNav('bugun')">
-    <div class="nav-ico">⚡</div>
-    <div class="nav-lbl">Bugün</div>
-  </div>
-  <div class="nav-item" id="nav-harita" onclick="switchNav('harita')">
-    <div class="nav-ico">🗺️</div>
-    <div class="nav-lbl">Harita</div>
-  </div>
-  <div class="nav-item" id="nav-araclar" onclick="switchNav('araclar')">
-    <div class="nav-ico">🔧</div>
-    <div class="nav-lbl">Araçlar</div>
-  </div>
-  <div class="nav-item" id="nav-notlar" onclick="switchNav('notlar')">
-    <div class="nav-ico">📝</div>
-    <div class="nav-lbl">Notlar</div>
-  </div>
+  <div class="nav-item active" id="nav-bugun" onclick="switchNav('bugun')"><div class="nav-ico">⚡</div><div class="nav-lbl">Bugün</div></div>
+  <div class="nav-item" id="nav-harita" onclick="switchNav('harita')"><div class="nav-ico">🗺️</div><div class="nav-lbl">Harita</div></div>
+  <div class="nav-item" id="nav-araclar" onclick="switchNav('araclar')"><div class="nav-ico">🔧</div><div class="nav-lbl">Araçlar</div></div>
+  <div class="nav-item" id="nav-notlar" onclick="switchNav('notlar')"><div class="nav-ico">📝</div><div class="nav-lbl">Notlar</div></div>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
-const DAYS = ['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'];
-const todayIdx = (() => { const d = new Date().getDay(); return d === 0 ? 6 : d - 1; })();
-const DAILY_TASKS = ['html-video','html-kod','html-not'];
+// ── DERS PLANI ──────────────────────────────────────────────
+const PLAN = [
+  // Hafta 1
+  { week:1, day:1, title:"HTML'e Giriş", emoji:"🌱", tasks:[
+    {id:"w1d1t1", text:"FreeCodeCamp'te ilk dersi aç ve HTML giriş bölümünü yap", xp:20},
+    {id:"w1d1t2", text:"İlk <h1> ve <p> etiketlerini CodePen'de yaz, gör", xp:25},
+    {id:"w1d1t3", text:"Bugün öğrendiklerini Notlar sekmesine yaz", xp:15}
+  ], extra:[
+    {id:"w1d1e1", text:"<a> link ve <img> görsel etiketlerini öğren", xp:30},
+    {id:"w1d1e2", text:"<ul> ve <li> ile liste yap", xp:30}
+  ], project:[
+    {id:"w1d1p1", text:"Kendi adını ve hobilerini gösteren mini HTML sayfası yap", xp:50}
+  ]},
+  { week:1, day:2, title:"HTML Yapısı", emoji:"🏗️", tasks:[
+    {id:"w1d2t1", text:"FreeCodeCamp'te bugünkü adımları tamamla", xp:20},
+    {id:"w1d2t2", text:"<head>, <body>, <title> etiketlerini öğren", xp:25},
+    {id:"w1d2t3", text:"Tam bir HTML dosyası sıfırdan yaz", xp:20}
+  ], extra:[
+    {id:"w1d2e1", text:"<div> ve <span> ne işe yarar? Dene", xp:30},
+    {id:"w1d2e2", text:"HTML yorum satırı <!-- --> kullan", xp:20}
+  ], project:[
+    {id:"w1d2p1", text:"Dün yaptığın sayfaya link ve görsel ekle", xp:50}
+  ]},
+  { week:1, day:3, title:"HTML Linkleri & Görseller", emoji:"🔗", tasks:[
+    {id:"w1d3t1", text:"FreeCodeCamp'te link ve görsel derslerini yap", xp:20},
+    {id:"w1d3t2", text:"<a href> ile başka siteye link ekle", xp:25},
+    {id:"w1d3t3", text:"<img src> ile görsel ekle", xp:20}
+  ], extra:[
+    {id:"w1d3e1", text:"target='_blank' ne yapar? Dene", xp:20},
+    {id:"w1d3e2", text:"Görsele alt text ekle, neden önemli? Araştır", xp:25}
+  ], project:[
+    {id:"w1d3p1", text:"Favori 3 web sitene link veren bir sayfa yap", xp:50}
+  ]},
+  { week:1, day:4, title:"HTML Listeler & Tablolar", emoji:"📋", tasks:[
+    {id:"w1d4t1", text:"FreeCodeCamp'te liste dersini tamamla", xp:20},
+    {id:"w1d4t2", text:"<ul>, <ol>, <li> ile liste oluştur", xp:25},
+    {id:"w1d4t3", text:"Basit bir <table> yap", xp:20}
+  ], extra:[
+    {id:"w1d4e1", text:"<form>, <input>, <button> etiketlerini dene", xp:35},
+    {id:"w1d4e2", text:"<textarea> ve <select> ekle", xp:25}
+  ], project:[
+    {id:"w1d4p1", text:"Günlük programını gösteren bir tablo yap", xp:55}
+  ]},
+  { week:1, day:5, title:"HTML Özet & Pratik", emoji:"⚡", tasks:[
+    {id:"w1d5t1", text:"Bu haftaki tüm HTML konularını gözden geçir", xp:20},
+    {id:"w1d5t2", text:"FreeCodeCamp haftalık ilerlemeye bak", xp:15},
+    {id:"w1d5t3", text:"Bugünkü notlarını yaz", xp:15}
+  ], extra:[
+    {id:"w1d5e1", text:"Semantic HTML öğren: <header>, <main>, <footer>", xp:35},
+    {id:"w1d5e2", text:"<nav> menü yap", xp:30}
+  ], project:[
+    {id:"w1d5p1", text:"Haftalık mini proje: Kişisel hakkımda sayfası", xp:70}
+  ]},
+  { week:1, day:6, title:"Hafta Sonu Projesi", emoji:"🎨", tasks:[
+    {id:"w1d6t1", text:"Bu haftanın en zor konusunu tekrar çalış", xp:20},
+    {id:"w1d6t2", text:"CodePen'de serbest deney yap", xp:25},
+    {id:"w1d6t3", text:"Haftanın öğrenmelerini özetle", xp:15}
+  ], extra:[
+    {id:"w1d6e1", text:"MDN'de HTML referansına göz at", xp:25},
+    {id:"w1d6e2", text:"Favori bir web sitesinin HTML koduna bak (sağ tık → İncele)", xp:35}
+  ], project:[
+    {id:"w1d6p1", text:"Bu haftaki projeyi GitHub'a yükle", xp:80}
+  ]},
+  { week:1, day:7, title:"Dinlenme & Tekrar", emoji:"😌", tasks:[
+    {id:"w1d7t1", text:"Bu haftanın notlarını oku", xp:15},
+    {id:"w1d7t2", text:"Öğrendiğin 5 HTML etiketini yaz", xp:15},
+    {id:"w1d7t3", text:"Gelecek hafta ne öğreneceğine bak (CSS!)", xp:10}
+  ], extra:[
+    {id:"w1d7e1", text:"YouTube'da HTML özet videosu izle", xp:25}
+  ], project:[
+    {id:"w1d7p1", text:"Haftanın en iyi öğrendiğin şeyi birine anlat", xp:30}
+  ]},
+  // Hafta 2
+  { week:2, day:1, title:"CSS'e Giriş", emoji:"🎨", tasks:[
+    {id:"w2d1t1", text:"FreeCodeCamp'te CSS dersine başla", xp:20},
+    {id:"w2d1t2", text:"İlk <style> etiketini yaz, renk değiştir", xp:25},
+    {id:"w2d1t3", text:"CSS nedir? Notlarına yaz", xp:15}
+  ], extra:[
+    {id:"w2d1e1", text:"color ve background-color özelliklerini dene", xp:30},
+    {id:"w2d1e2", text:"font-size ve font-family değiştir", xp:30}
+  ], project:[
+    {id:"w2d1p1", text:"Dün yaptığın HTML sayfasına CSS ekle", xp:55}
+  ]},
+  { week:2, day:2, title:"CSS Seçiciler", emoji:"🎯", tasks:[
+    {id:"w2d2t1", text:"FreeCodeCamp CSS seçici dersini tamamla", xp:20},
+    {id:"w2d2t2", text:"class ve id seçicilerini öğren", xp:25},
+    {id:"w2d2t3", text:"3 farklı seçici kullan", xp:20}
+  ], extra:[
+    {id:"w2d2e1", text:"Pseudo-class :hover efekti ekle", xp:35},
+    {id:"w2d2e2", text:"CSS dosyasını ayrı bir .css dosyasına taşı", xp:30}
+  ], project:[
+    {id:"w2d2p1", text:"Renkli ve stilize bir navigasyon menüsü yap", xp:60}
+  ]},
+];
 
+// ── BAŞLANGIÇ TARİHİ ─────────────────────────────────────────
+// İlk gün 8 Haziran 2025 olarak ayarlıyoruz (kullanıcının başladığı gün)
+const START_DATE = new Date('2025-06-08T00:00:00+03:00');
+
+function getTurkeyDate() {
+  return new Date(new Date().toLocaleString('en-US', {timeZone:'Europe/Istanbul'}));
+}
+
+function getCurrentDayIndex() {
+  const now = getTurkeyDate();
+  const start = new Date(START_DATE.toLocaleString('en-US', {timeZone:'Europe/Istanbul'}));
+  start.setHours(0,0,0,0);
+  now.setHours(0,0,0,0);
+  const diff = Math.floor((now - start) / (1000*60*60*24));
+  return Math.max(0, Math.min(diff, PLAN.length - 1));
+}
+
+function getCurrentPlan() {
+  return PLAN[getCurrentDayIndex()];
+}
+
+// ── HAFTA ŞERİDİ ─────────────────────────────────────────────
+const DAYS = ['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'];
 function buildWeek() {
   const strip = document.getElementById('week-strip');
-  const done = JSON.parse(localStorage.getItem('weekDone') || '[]');
+  const doneDays = JSON.parse(localStorage.getItem('doneDays') || '[]');
+  const todayIdx = getTurkeyDate().getDay();
+  const todayStrip = todayIdx === 0 ? 6 : todayIdx - 1;
   strip.innerHTML = DAYS.map((d, i) => {
-    const isDone = done.includes(i), isToday = i === todayIdx;
+    const done = doneDays.includes(i);
+    const isToday = i === todayStrip;
     return `<div class="day-item">
-      <div class="day-circle ${isDone?'done':isToday?'today':''}">${isDone?'✓':d}</div>
+      <div class="day-circle ${done?'done':isToday?'today':''}">${done?'✓':d}</div>
       <div class="day-lbl">${d}</div>
     </div>`;
   }).join('');
 }
 
-function loadState() {
+// ── GÖREV KARTLARI ───────────────────────────────────────────
+function buildTaskCard(containerId, taskList, colorClass) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const tasks = JSON.parse(localStorage.getItem('tasks') || '{}');
+  container.innerHTML = taskList.map(t => {
+    const done = tasks[t.id];
+    return `<div class="task-item" onclick="toggleTask(this,'${t.id}',${t.xp})">
+      <div class="check ${done?'done'}" id="chk-${t.id}">${done?'✓':''}</div>
+      <div class="task-txt ${done?'done'}" id="txt-${t.id}">${t.text}</div>
+      <div class="task-xp ${colorClass}">+${t.xp} XP</div>
+    </div>`;
+  }).join('');
+}
+
+function renderDay() {
+  const plan = getCurrentPlan();
+  document.getElementById('day-title').textContent = `Hafta ${plan.week}, Gün ${plan.day}`;
+  document.getElementById('day-sub').textContent = plan.title;
+  document.getElementById('day-emoji').textContent = plan.emoji;
+  buildTaskCard('daily-tasks-card', plan.tasks, '');
+  buildTaskCard('extra-tasks-card', plan.extra, 'pink');
+  buildTaskCard('project-tasks-card', plan.project, 'green');
+  checkUnlock();
+}
+
+// ── XP & DURUM ───────────────────────────────────────────────
+function loadStats() {
   const xp = parseInt(localStorage.getItem('xp') || '0');
   const streak = parseInt(localStorage.getItem('streak') || '0');
   const totalDone = parseInt(localStorage.getItem('totalDone') || '0');
@@ -640,26 +416,17 @@ function loadState() {
   document.getElementById('s-streak').textContent = streak;
   document.getElementById('s-done').textContent = totalDone;
   document.getElementById('s-xp').textContent = xp;
-
-  const tasks = JSON.parse(localStorage.getItem('tasks') || '{}');
-  Object.keys(tasks).forEach(id => {
-    if (!tasks[id]) return;
-    const chk = document.getElementById('chk-' + id);
-    const txt = document.getElementById('txt-' + id);
-    if (chk) { chk.classList.add('done'); chk.textContent = '✓'; }
-    if (txt) txt.classList.add('done');
-  });
-
-  checkDailyUnlock(tasks);
 }
 
-function checkDailyUnlock(tasks) {
-  const allDone = DAILY_TASKS.every(id => tasks[id]);
+function checkUnlock() {
+  const plan = getCurrentPlan();
+  const tasks = JSON.parse(localStorage.getItem('tasks') || '{}');
+  const allDone = plan.tasks.every(t => tasks[t.id]);
   document.getElementById('unlock-banner').classList.toggle('show', allDone);
   document.getElementById('extra-tasks').classList.toggle('unlocked', allDone);
 }
 
-function toggleTask(el, pts, id) {
+function toggleTask(el, id, pts) {
   const chk = document.getElementById('chk-' + id);
   const txt = document.getElementById('txt-' + id);
   const tasks = JSON.parse(localStorage.getItem('tasks') || '{}');
@@ -680,11 +447,14 @@ function toggleTask(el, pts, id) {
     xp += pts; totalDone += 1;
     showToast('+' + pts + ' XP kazandın! 🎉');
     if (pts >= 50) confetti();
-    const weekDone = JSON.parse(localStorage.getItem('weekDone') || '[]');
-    if (!weekDone.includes(todayIdx)) {
-      weekDone.push(todayIdx);
-      localStorage.setItem('weekDone', JSON.stringify(weekDone));
-      localStorage.setItem('streak', weekDone.length);
+    // Seriyi güncelle
+    const now = getTurkeyDate();
+    const todayIdx = now.getDay() === 0 ? 6 : now.getDay() - 1;
+    const doneDays = JSON.parse(localStorage.getItem('doneDays') || '[]');
+    if (!doneDays.includes(todayIdx)) {
+      doneDays.push(todayIdx);
+      localStorage.setItem('doneDays', JSON.stringify(doneDays));
+      localStorage.setItem('streak', doneDays.length);
       buildWeek();
     }
   }
@@ -692,12 +462,12 @@ function toggleTask(el, pts, id) {
   localStorage.setItem('tasks', JSON.stringify(tasks));
   localStorage.setItem('xp', xp);
   localStorage.setItem('totalDone', totalDone);
-  loadState();
+  loadStats();
+  checkUnlock();
 }
 
-function togglePhase(header) {
-  header.nextElementSibling.classList.toggle('open');
-}
+// ── DİĞER FONKSİYONLAR ──────────────────────────────────────
+function togglePhase(h) { h.nextElementSibling.classList.toggle('open'); }
 
 function switchTab(name, btn) {
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
@@ -709,9 +479,8 @@ function switchTab(name, btn) {
 function switchNav(name) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('nav-' + name).classList.add('active');
-  const tabBtns = document.querySelectorAll('.tab');
   const names = ['bugun','harita','araclar','notlar'];
-  tabBtns.forEach((t, i) => t.classList.toggle('active', names[i] === name));
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', names[i]===name));
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
 }
@@ -747,14 +516,16 @@ function confetti() {
   for (let i = 0; i < 35; i++) {
     const el = document.createElement('div');
     el.className = 'confetti-piece';
-    el.style.cssText = `left:${Math.random()*100}vw;top:-10px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${1.2+Math.random()*2}s;animation-delay:${Math.random()*0.6}s;transform:rotate(${Math.random()*360}deg);`;
+    el.style.cssText = `left:${Math.random()*100}vw;top:-10px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${1.2+Math.random()*2}s;animation-delay:${Math.random()*0.6}s;`;
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 3500);
   }
 }
 
+// ── BAŞLAT ───────────────────────────────────────────────────
 buildWeek();
-loadState();
+renderDay();
+loadStats();
 renderNotes();
 </script>
 </body>
