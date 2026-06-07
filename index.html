@@ -4,118 +4,114 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Serkut — Kod Yolculuğu</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #f0f2f5;
-  --surface: #ffffff;
-  --surface2: #f7f8fa;
-  --border: rgba(0,0,0,0.07);
-  --border2: rgba(0,0,0,0.12);
-  --accent: #6c63ff;
-  --accent-light: #ede9ff;
-  --accent2: #ff6b9d;
-  --accent2-light: #fff0f5;
-  --accent3: #00c48c;
-  --accent3-light: #e6faf4;
-  --text: #1a1a2e;
-  --text2: #4a4a6a;
-  --muted: #9999b5;
-  --font: 'Nunito', sans-serif;
-  --radius: 16px;
-  --radius-sm: 10px;
+  --bg:#f0f2f5;--surface:#fff;--surface2:#f7f8fa;
+  --border:rgba(0,0,0,0.07);--border2:rgba(0,0,0,0.12);
+  --accent:#6c63ff;--al:#ede9ff;
+  --accent2:#ff6b9d;--a2l:#fff0f5;
+  --accent3:#00c48c;--a3l:#e6faf4;
+  --text:#1a1a2e;--text2:#4a4a6a;--muted:#9999b5;
+  --font:'Nunito',sans-serif;--r:16px;--rs:10px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;padding-bottom:90px;}
 .container{max-width:480px;margin:0 auto;padding:0 16px;}
 .header{padding:28px 0 16px;display:flex;align-items:center;justify-content:space-between;}
-.logo{font-size:20px;font-weight:700;color:var(--text);}
-.logo span{color:var(--accent);}
-.level-badge{background:var(--accent-light);color:var(--accent);border-radius:99px;padding:5px 14px;font-size:13px;font-weight:600;}
-.xp-card{background:var(--surface);border-radius:var(--radius);padding:16px 18px;margin-bottom:14px;border:1px solid var(--border);}
+.logo{font-size:20px;font-weight:700;}.logo span{color:var(--accent);}
+.level-badge{background:var(--al);color:var(--accent);border-radius:99px;padding:5px 14px;font-size:13px;font-weight:600;}
+.xp-card{background:var(--surface);border-radius:var(--r);padding:16px 18px;margin-bottom:14px;border:1px solid var(--border);}
 .xp-top{display:flex;justify-content:space-between;margin-bottom:10px;}
 .xp-label{font-size:13px;color:var(--muted);font-weight:500;}
 .xp-val{font-size:13px;color:var(--accent);font-weight:600;}
 .xp-track{height:8px;background:var(--bg);border-radius:99px;overflow:hidden;}
-.xp-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;transition:width 0.8s cubic-bezier(.4,0,.2,1);}
+.xp-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;transition:width 0.6s ease;}
 .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 10px;text-align:center;}
-.stat-num{font-size:24px;font-weight:700;color:var(--text);line-height:1;}
-.stat-num.purple{color:var(--accent);}
-.stat-num.green{color:var(--accent3);}
-.stat-num.pink{color:var(--accent2);}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:14px 10px;text-align:center;}
+.stat-num{font-size:24px;font-weight:700;line-height:1;}
 .stat-lbl{font-size:11px;color:var(--muted);margin-top:4px;font-weight:500;}
-.week-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:14px;}
-.section-label{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;}
+.week-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;margin-bottom:14px;}
+.slabel{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;}
 .week-strip{display:flex;justify-content:space-between;}
 .day-item{display:flex;flex-direction:column;align-items:center;gap:5px;}
-.day-circle{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--muted);transition:all .2s;background:var(--surface2);}
+.day-circle{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--muted);background:var(--surface2);}
 .day-circle.done{background:var(--accent3);border-color:var(--accent3);color:#fff;}
-.day-circle.today{border-color:var(--accent);color:var(--accent);background:var(--accent-light);}
+.day-circle.today{border-color:var(--accent);color:var(--accent);background:var(--al);}
 .day-lbl{font-size:10px;color:var(--muted);font-weight:500;}
-.tabs{display:flex;gap:4px;background:var(--surface);border-radius:var(--radius-sm);padding:4px;margin-bottom:14px;border:1px solid var(--border);}
+.tabs{display:flex;gap:4px;background:var(--surface);border-radius:var(--rs);padding:4px;margin-bottom:14px;border:1px solid var(--border);}
 .tab{flex:1;padding:9px 4px;text-align:center;font-size:12px;font-weight:600;font-family:var(--font);color:var(--muted);cursor:pointer;border-radius:7px;border:none;background:transparent;transition:all .2s;}
 .tab.active{background:var(--accent);color:#fff;}
-.tab-content{display:none;}
-.tab-content.active{display:block;}
-.day-header{background:var(--accent-light);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;}
-.day-title{font-size:14px;font-weight:700;color:var(--accent);}
-.day-sub{font-size:11px;color:var(--text2);font-weight:500;}
-.task-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:12px;}
-.task-head{padding:12px 16px;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:8px;}
-.head-dot{width:8px;height:8px;border-radius:50%;}
-.task-item{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;-webkit-tap-highlight-color:transparent;}
+.tab-content{display:none;}.tab-content.active{display:block;}
+.day-header{background:var(--al);border-radius:var(--rs);padding:12px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;}
+.day-title{font-size:15px;font-weight:700;color:var(--accent);}
+.day-sub{font-size:12px;color:var(--text2);margin-top:2px;font-weight:500;}
+.day-emoji{font-size:26px;}
+.task-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:12px;}
+.task-head{padding:11px 16px;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:8px;}
+.hdot{width:8px;height:8px;border-radius:50%;}
+.task-item{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;-webkit-tap-highlight-color:transparent;user-select:none;}
 .task-item:last-child{border-bottom:none;}
-.task-item:hover{background:var(--surface2);}
-.check{width:24px;height:24px;border-radius:50%;border:2px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:13px;background:var(--surface2);}
+.task-item:active{background:var(--surface2);}
+.check{width:24px;height:24px;border-radius:50%;border:2px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;background:var(--surface2);transition:all .2s;}
 .check.done{background:var(--accent3);border-color:var(--accent3);color:#fff;}
-.task-txt{flex:1;font-size:13px;font-weight:400;color:var(--text);line-height:1.5;}
+.task-txt{flex:1;font-size:13px;color:var(--text);line-height:1.5;}
 .task-txt.done{color:var(--muted);text-decoration:line-through;}
-.task-xp{font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-light);padding:3px 8px;border-radius:99px;white-space:nowrap;}
-.task-xp.pink{color:var(--accent2);background:var(--accent2-light);}
-.task-xp.green{color:var(--accent3);background:var(--accent3-light);}
-.unlock-banner{background:linear-gradient(135deg,var(--accent-light),var(--accent2-light));border:1px solid rgba(108,99,255,0.2);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px;display:none;text-align:center;}
+.xp-tag{font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;white-space:nowrap;}
+.xp-purple{color:var(--accent);background:var(--al);}
+.xp-pink{color:var(--accent2);background:var(--a2l);}
+.xp-green{color:var(--accent3);background:var(--a3l);}
+.unlock-banner{background:linear-gradient(135deg,var(--al),var(--a2l));border:1px solid rgba(108,99,255,0.2);border-radius:var(--r);padding:14px 16px;margin-bottom:12px;display:none;text-align:center;}
 .unlock-banner.show{display:block;}
-.unlock-banner h3{font-size:15px;font-weight:700;color:var(--accent);margin-bottom:4px;}
+.unlock-banner h3{font-size:15px;font-weight:700;color:var(--accent);margin-bottom:3px;}
 .unlock-banner p{font-size:12px;color:var(--text2);}
-.extra-tasks{display:none;}
-.extra-tasks.unlocked{display:block;}
-.phase{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;}
-.phase-h{padding:14px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:background .15s;}
+.extra-wrap{display:none;}.extra-wrap.show{display:block;}
+.past-day{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:12px 16px;margin-bottom:10px;display:flex;align-items:center;gap:10px;cursor:pointer;}
+.past-day:hover{background:var(--surface2);}
+.past-badge{font-size:11px;font-weight:600;padding:3px 8px;border-radius:99px;background:var(--a3l);color:var(--accent3);}
+.past-name{flex:1;font-size:13px;font-weight:600;color:var(--text);}
+.past-arrow{color:var(--muted);}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:500;display:none;align-items:flex-end;}
+.modal-overlay.show{display:flex;}
+.modal{background:var(--surface);border-radius:20px 20px 0 0;width:100%;max-height:80vh;overflow-y:auto;padding:20px 16px 40px;}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.modal-title{font-size:16px;font-weight:700;color:var(--accent);}
+.modal-close{font-size:22px;cursor:pointer;color:var(--muted);background:none;border:none;line-height:1;}
+.phase{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;overflow:hidden;}
+.phase-h{padding:14px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;}
 .phase-h:hover{background:var(--surface2);}
-.phase-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
-.phase-name{flex:1;font-size:14px;font-weight:600;color:var(--text);}
+.pdot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.phase-name{flex:1;font-size:14px;font-weight:600;}
 .phase-tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:99px;}
 .phase-body{display:none;padding:4px 16px 14px;border-top:1px solid var(--border);}
 .phase-body.open{display:block;}
-.week-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
-.week-item:last-of-type{border-bottom:none;}
-.week-n{font-size:11px;font-weight:600;color:var(--muted);min-width:58px;padding-top:2px;}
-.week-t{font-size:13px;color:var(--text2);line-height:1.5;}
-.phase-win{margin-top:10px;font-size:12px;font-weight:600;color:var(--accent3);}
-.tool{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:8px;display:flex;align-items:center;gap:14px;text-decoration:none;transition:all .2s;}
-.tool:hover{border-color:rgba(108,99,255,0.3);background:var(--surface2);transform:translateY(-1px);}
+.wi{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
+.wi:last-of-type{border-bottom:none;}
+.wn{font-size:11px;font-weight:600;color:var(--muted);min-width:58px;padding-top:2px;}
+.wt{font-size:13px;color:var(--text2);line-height:1.5;}
+.pwin{margin-top:10px;font-size:12px;font-weight:600;color:var(--accent3);}
+.tool{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:8px;display:flex;align-items:center;gap:14px;text-decoration:none;transition:all .2s;}
+.tool:hover{border-color:rgba(108,99,255,0.3);transform:translateY(-1px);}
 .tool-ico{font-size:24px;width:40px;text-align:center;flex-shrink:0;}
 .tool-name{font-size:14px;font-weight:600;color:var(--text);}
 .tool-desc{font-size:12px;color:var(--muted);margin-top:2px;}
-.tool-arrow{color:var(--muted);font-size:18px;margin-left:auto;}
-.note-area{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;color:var(--text);font-family:var(--font);font-size:14px;resize:none;height:120px;margin-bottom:8px;outline:none;line-height:1.6;}
+.tool-arr{color:var(--muted);font-size:18px;margin-left:auto;}
+.note-area{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;color:var(--text);font-family:var(--font);font-size:14px;resize:none;height:120px;margin-bottom:8px;outline:none;line-height:1.6;}
 .note-area:focus{border-color:rgba(108,99,255,0.4);}
 .note-area::placeholder{color:var(--muted);}
-.save-btn{width:100%;padding:13px;background:var(--accent);border:none;border-radius:var(--radius-sm);color:#fff;font-family:var(--font);font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;}
-.save-btn:hover{background:#5a52e0;}
-.save-btn:active{transform:scale(.98);}
-.note-entry{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;margin-top:8px;font-size:13px;color:var(--text);line-height:1.6;}
+.save-btn{width:100%;padding:13px;background:var(--accent);border:none;border-radius:var(--rs);color:#fff;font-family:var(--font);font-size:14px;font-weight:600;cursor:pointer;}
+.save-btn:active{opacity:.85;}
+.note-entry{background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:12px 14px;margin-top:8px;font-size:13px;color:var(--text);line-height:1.6;}
 .note-date{font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-top:1px solid var(--border);display:flex;padding:8px 0 18px;z-index:100;}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-top:1px solid var(--border);display:flex;padding:8px 0 18px;z-index:100;}
 .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:6px 0;-webkit-tap-highlight-color:transparent;}
 .nav-ico{font-size:22px;}
-.nav-lbl{font-size:10px;font-weight:600;color:var(--muted);transition:color .2s;}
+.nav-lbl{font-size:10px;font-weight:600;color:var(--muted);}
 .nav-item.active .nav-lbl{color:var(--accent);}
-.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--text);color:#fff;font-family:var(--font);font-size:13px;font-weight:600;padding:10px 20px;border-radius:99px;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;z-index:200;}
+.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--text);color:#fff;font-family:var(--font);font-size:13px;font-weight:600;padding:10px 20px;border-radius:99px;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;z-index:999;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 @keyframes fall{to{transform:translateY(100vh) rotate(720deg);opacity:0;}}
-.confetti-piece{position:fixed;width:8px;height:8px;border-radius:2px;animation:fall linear forwards;pointer-events:none;z-index:300;}
+.cp{position:fixed;width:8px;height:8px;border-radius:2px;animation:fall linear forwards;pointer-events:none;z-index:999;}
 </style>
 </head>
 <body>
@@ -125,111 +121,101 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     <div class="level-badge" id="level-badge">Seviye 1</div>
   </div>
   <div class="xp-card">
-    <div class="xp-top">
-      <span class="xp-label">Deneyim Puanı</span>
-      <span class="xp-val" id="xp-text">0 / 100 XP</span>
-    </div>
+    <div class="xp-top"><span class="xp-label">Deneyim Puanı</span><span class="xp-val" id="xp-text">0 / 100 XP</span></div>
     <div class="xp-track"><div class="xp-fill" id="xp-fill" style="width:0%"></div></div>
   </div>
   <div class="stat-row">
-    <div class="stat"><div class="stat-num pink" id="s-streak">0</div><div class="stat-lbl">🔥 Seri</div></div>
-    <div class="stat"><div class="stat-num green" id="s-done">0</div><div class="stat-lbl">✓ Görev</div></div>
-    <div class="stat"><div class="stat-num purple" id="s-xp">0</div><div class="stat-lbl">★ Toplam XP</div></div>
+    <div class="stat"><div class="stat-num" style="color:var(--accent2)" id="s-streak">0</div><div class="stat-lbl">🔥 Seri</div></div>
+    <div class="stat"><div class="stat-num" style="color:var(--accent3)" id="s-done">0</div><div class="stat-lbl">✓ Görev</div></div>
+    <div class="stat"><div class="stat-num" style="color:var(--accent)" id="s-xp">0</div><div class="stat-lbl">★ Toplam XP</div></div>
   </div>
   <div class="tabs">
     <button class="tab active" onclick="switchTab('bugun',this)">Bugün</button>
+    <button class="tab" onclick="switchTab('gecmis',this)">Geçmiş</button>
     <button class="tab" onclick="switchTab('harita',this)">Harita</button>
-    <button class="tab" onclick="switchTab('araclar',this)">Araçlar</button>
     <button class="tab" onclick="switchTab('notlar',this)">Notlar</button>
   </div>
 
   <!-- BUGÜN -->
   <div class="tab-content active" id="tab-bugun">
     <div class="week-card">
-      <div class="section-label">Bu Hafta</div>
+      <div class="slabel">Bu Hafta</div>
       <div class="week-strip" id="week-strip"></div>
     </div>
     <div class="day-header">
-      <div>
-        <div class="day-title" id="day-title">Hafta 1, Gün 1</div>
-        <div class="day-sub" id="day-sub">HTML'e Giriş</div>
-      </div>
-      <div style="font-size:22px" id="day-emoji">🌱</div>
+      <div><div class="day-title" id="day-title">Yükleniyor...</div><div class="day-sub" id="day-sub"></div></div>
+      <div class="day-emoji" id="day-emoji">⏳</div>
     </div>
-    <div class="section-label">Günlük Görevler</div>
-    <div class="task-card" id="daily-tasks-card"></div>
+    <div class="slabel">Günlük Görevler</div>
+    <div class="task-card" id="daily-card"></div>
     <div class="unlock-banner" id="unlock-banner">
       <h3>🎉 Günlük görevler tamamlandı!</h3>
-      <p>Ekstra dersler ve proje görevi açıldı — devam et!</p>
+      <p>Ekstra dersler ve proje görevi açıldı!</p>
     </div>
-    <div class="extra-tasks" id="extra-tasks">
-      <div class="section-label">Ekstra Dersler</div>
-      <div class="task-card" id="extra-tasks-card"></div>
-      <div class="section-label">Proje Görevi</div>
-      <div class="task-card" id="project-tasks-card"></div>
+    <div class="extra-wrap" id="extra-wrap">
+      <div class="slabel">Ekstra Dersler</div>
+      <div class="task-card" id="extra-card"></div>
+      <div class="slabel">Proje Görevi</div>
+      <div class="task-card" id="project-card"></div>
     </div>
+  </div>
+
+  <!-- GEÇMİŞ -->
+  <div class="tab-content" id="tab-gecmis">
+    <div class="slabel">Tamamlanan Günler</div>
+    <div id="past-list"></div>
   </div>
 
   <!-- HARİTA -->
   <div class="tab-content" id="tab-harita">
-    <div class="section-label">12 Aylık Yol Haritası</div>
+    <div class="slabel">12 Aylık Yol Haritası</div>
     <div class="phase">
       <div class="phase-h" onclick="togglePhase(this)">
-        <div class="phase-dot" style="background:var(--accent)"></div>
+        <div class="pdot" style="background:var(--accent)"></div>
         <div class="phase-name">Faz 1 — Temel (1–3. ay)</div>
-        <div class="phase-tag" style="background:var(--accent-light);color:var(--accent)">Şu an ◀</div>
+        <div class="phase-tag" style="background:var(--al);color:var(--accent)">Şu an ◀</div>
       </div>
       <div class="phase-body open">
-        <div class="week-item"><div class="week-n">H. 1–2</div><div class="week-t">HTML: etiketler, linkler, görseller</div></div>
-        <div class="week-item"><div class="week-n">H. 3–4</div><div class="week-t">CSS: renkler, fontlar, kutu modeli</div></div>
-        <div class="week-item"><div class="week-n">H. 5–6</div><div class="week-t">CSS Flexbox, mobil uyumlu layout</div></div>
-        <div class="week-item"><div class="week-n">H. 7–8</div><div class="week-t">JavaScript: değişkenler, koşullar</div></div>
-        <div class="week-item"><div class="week-n">H. 9–12</div><div class="week-t">JS fonksiyonlar, DOM manipülasyonu</div></div>
-        <div class="phase-win">🏆 Proje: Kişisel portfolio sitesi</div>
+        <div class="wi"><div class="wn">H. 1–2</div><div class="wt">HTML: etiketler, linkler, görseller</div></div>
+        <div class="wi"><div class="wn">H. 3–4</div><div class="wt">CSS: renkler, fontlar, kutu modeli</div></div>
+        <div class="wi"><div class="wn">H. 5–6</div><div class="wt">CSS Flexbox, mobil uyumlu layout</div></div>
+        <div class="wi"><div class="wn">H. 7–8</div><div class="wt">JavaScript: değişkenler, koşullar</div></div>
+        <div class="wi"><div class="wn">H. 9–12</div><div class="wt">JS fonksiyonlar, DOM manipülasyonu</div></div>
+        <div class="pwin">🏆 Proje: Kişisel portfolio sitesi</div>
       </div>
     </div>
     <div class="phase">
       <div class="phase-h" onclick="togglePhase(this)">
-        <div class="phase-dot" style="background:var(--accent3)"></div>
+        <div class="pdot" style="background:var(--accent3)"></div>
         <div class="phase-name">Faz 2 — Derinleş (4–8. ay)</div>
         <div class="phase-tag" style="background:var(--surface2);color:var(--muted)">Kilitli 🔒</div>
       </div>
       <div class="phase-body">
-        <div class="week-item"><div class="week-n">Ay 4–5</div><div class="week-t">React: komponentler, state, props</div></div>
-        <div class="week-item"><div class="week-n">Ay 6</div><div class="week-t">Python giriş: oyun mantığı için</div></div>
-        <div class="week-item"><div class="week-n">Ay 7–8</div><div class="week-t">Git, GitHub, proje yönetimi</div></div>
-        <div class="phase-win">🏆 Proje: React web uygulaması</div>
+        <div class="wi"><div class="wn">Ay 4–5</div><div class="wt">React: komponentler, state, props</div></div>
+        <div class="wi"><div class="wn">Ay 6</div><div class="wt">Python giriş: oyun mantığı için</div></div>
+        <div class="wi"><div class="wn">Ay 7–8</div><div class="wt">Git, GitHub, proje yönetimi</div></div>
+        <div class="pwin">🏆 Proje: React web uygulaması</div>
       </div>
     </div>
     <div class="phase">
       <div class="phase-h" onclick="togglePhase(this)">
-        <div class="phase-dot" style="background:var(--accent2)"></div>
+        <div class="pdot" style="background:var(--accent2)"></div>
         <div class="phase-name">Faz 3 — Uzmanlaş (9–12. ay)</div>
         <div class="phase-tag" style="background:var(--surface2);color:var(--muted)">Kilitli 🔒</div>
       </div>
       <div class="phase-body">
-        <div class="week-item"><div class="week-n">Ay 9–10</div><div class="week-t">Unity / Pygame ile 2D oyun</div></div>
-        <div class="week-item"><div class="week-n">Ay 11</div><div class="week-t">React Native: iOS + Android uygulama</div></div>
-        <div class="week-item"><div class="week-n">Ay 12</div><div class="week-t">Backend: Node.js, API, veritabanı</div></div>
-        <div class="phase-win">🏆 Proje: Kendi seçtiğin büyük proje</div>
+        <div class="wi"><div class="wn">Ay 9–10</div><div class="wt">Unity / Pygame ile 2D oyun</div></div>
+        <div class="wi"><div class="wn">Ay 11</div><div class="wt">React Native: iOS + Android uygulama</div></div>
+        <div class="wi"><div class="wn">Ay 12</div><div class="wt">Backend: Node.js, API, veritabanı</div></div>
+        <div class="pwin">🏆 Proje: Kendi seçtiğin büyük proje</div>
       </div>
     </div>
   </div>
 
-  <!-- ARAÇLAR -->
-  <div class="tab-content" id="tab-araclar">
-    <div class="section-label">Araçların</div>
-    <a class="tool" href="https://www.freecodecamp.org" target="_blank"><div class="tool-ico">🎓</div><div><div class="tool-name">FreeCodeCamp</div><div class="tool-desc">Ana öğrenme platformun — ücretsiz</div></div><div class="tool-arrow">→</div></a>
-    <a class="tool" href="https://codepen.io" target="_blank"><div class="tool-ico">✏️</div><div><div class="tool-name">CodePen</div><div class="tool-desc">Tarayıcıda anında kod yaz, gör</div></div><div class="tool-arrow">→</div></a>
-    <a class="tool" href="https://code.visualstudio.com" target="_blank"><div class="tool-ico">💻</div><div><div class="tool-name">VS Code</div><div class="tool-desc">Profesyonel kod editörü — ücretsiz</div></div><div class="tool-arrow">→</div></a>
-    <a class="tool" href="https://github.com" target="_blank"><div class="tool-ico">🐙</div><div><div class="tool-name">GitHub</div><div class="tool-desc">Projelerini sakla ve paylaş</div></div><div class="tool-arrow">→</div></a>
-    <a class="tool" href="https://developer.mozilla.org/tr" target="_blank"><div class="tool-ico">📖</div><div><div class="tool-name">MDN Docs</div><div class="tool-desc">HTML/CSS/JS referansı — Türkçe</div></div><div class="tool-arrow">→</div></a>
-  </div>
-
   <!-- NOTLAR -->
   <div class="tab-content" id="tab-notlar">
-    <div class="section-label">Günlük Notlar</div>
-    <textarea class="note-area" id="note-input" placeholder="Bugün ne öğrendin? Aklına takılan bir şey var mı? Buraya yaz..."></textarea>
+    <div class="slabel">Günlük Notlar</div>
+    <textarea class="note-area" id="note-input" placeholder="Bugün ne öğrendin? Aklına takılan bir şey var mı?"></textarea>
     <button class="save-btn" onclick="saveNote()">Notu Kaydet ✓</button>
     <div id="saved-notes"></div>
   </div>
@@ -237,137 +223,228 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 
 <div class="bottom-nav">
   <div class="nav-item active" id="nav-bugun" onclick="switchNav('bugun')"><div class="nav-ico">⚡</div><div class="nav-lbl">Bugün</div></div>
+  <div class="nav-item" id="nav-gecmis" onclick="switchNav('gecmis')"><div class="nav-ico">📅</div><div class="nav-lbl">Geçmiş</div></div>
   <div class="nav-item" id="nav-harita" onclick="switchNav('harita')"><div class="nav-ico">🗺️</div><div class="nav-lbl">Harita</div></div>
-  <div class="nav-item" id="nav-araclar" onclick="switchNav('araclar')"><div class="nav-ico">🔧</div><div class="nav-lbl">Araçlar</div></div>
   <div class="nav-item" id="nav-notlar" onclick="switchNav('notlar')"><div class="nav-ico">📝</div><div class="nav-lbl">Notlar</div></div>
 </div>
+
+<!-- MODAL: geçmiş gün detayı -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal" id="modal-content">
+    <div class="modal-head">
+      <div class="modal-title" id="modal-title"></div>
+      <button class="modal-close" onclick="document.getElementById('modal').classList.remove('show')">✕</button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
 // ── DERS PLANI ──────────────────────────────────────────────
 const PLAN = [
-  // Hafta 1
-  { week:1, day:1, title:"HTML'e Giriş", emoji:"🌱", tasks:[
-    {id:"w1d1t1", text:"FreeCodeCamp'te ilk dersi aç ve HTML giriş bölümünü yap", xp:20},
-    {id:"w1d1t2", text:"İlk <h1> ve <p> etiketlerini CodePen'de yaz, gör", xp:25},
-    {id:"w1d1t3", text:"Bugün öğrendiklerini Notlar sekmesine yaz", xp:15}
-  ], extra:[
-    {id:"w1d1e1", text:"<a> link ve <img> görsel etiketlerini öğren", xp:30},
-    {id:"w1d1e2", text:"<ul> ve <li> ile liste yap", xp:30}
-  ], project:[
-    {id:"w1d1p1", text:"Kendi adını ve hobilerini gösteren mini HTML sayfası yap", xp:50}
-  ]},
-  { week:1, day:2, title:"HTML Yapısı", emoji:"🏗️", tasks:[
-    {id:"w1d2t1", text:"FreeCodeCamp'te bugünkü adımları tamamla", xp:20},
-    {id:"w1d2t2", text:"<head>, <body>, <title> etiketlerini öğren", xp:25},
-    {id:"w1d2t3", text:"Tam bir HTML dosyası sıfırdan yaz", xp:20}
-  ], extra:[
-    {id:"w1d2e1", text:"<div> ve <span> ne işe yarar? Dene", xp:30},
-    {id:"w1d2e2", text:"HTML yorum satırı <!-- --> kullan", xp:20}
-  ], project:[
-    {id:"w1d2p1", text:"Dün yaptığın sayfaya link ve görsel ekle", xp:50}
-  ]},
-  { week:1, day:3, title:"HTML Linkleri & Görseller", emoji:"🔗", tasks:[
-    {id:"w1d3t1", text:"FreeCodeCamp'te link ve görsel derslerini yap", xp:20},
-    {id:"w1d3t2", text:"<a href> ile başka siteye link ekle", xp:25},
-    {id:"w1d3t3", text:"<img src> ile görsel ekle", xp:20}
-  ], extra:[
-    {id:"w1d3e1", text:"target='_blank' ne yapar? Dene", xp:20},
-    {id:"w1d3e2", text:"Görsele alt text ekle, neden önemli? Araştır", xp:25}
-  ], project:[
-    {id:"w1d3p1", text:"Favori 3 web sitene link veren bir sayfa yap", xp:50}
-  ]},
-  { week:1, day:4, title:"HTML Listeler & Tablolar", emoji:"📋", tasks:[
-    {id:"w1d4t1", text:"FreeCodeCamp'te liste dersini tamamla", xp:20},
-    {id:"w1d4t2", text:"<ul>, <ol>, <li> ile liste oluştur", xp:25},
-    {id:"w1d4t3", text:"Basit bir <table> yap", xp:20}
-  ], extra:[
-    {id:"w1d4e1", text:"<form>, <input>, <button> etiketlerini dene", xp:35},
-    {id:"w1d4e2", text:"<textarea> ve <select> ekle", xp:25}
-  ], project:[
-    {id:"w1d4p1", text:"Günlük programını gösteren bir tablo yap", xp:55}
-  ]},
-  { week:1, day:5, title:"HTML Özet & Pratik", emoji:"⚡", tasks:[
-    {id:"w1d5t1", text:"Bu haftaki tüm HTML konularını gözden geçir", xp:20},
-    {id:"w1d5t2", text:"FreeCodeCamp haftalık ilerlemeye bak", xp:15},
-    {id:"w1d5t3", text:"Bugünkü notlarını yaz", xp:15}
-  ], extra:[
-    {id:"w1d5e1", text:"Semantic HTML öğren: <header>, <main>, <footer>", xp:35},
-    {id:"w1d5e2", text:"<nav> menü yap", xp:30}
-  ], project:[
-    {id:"w1d5p1", text:"Haftalık mini proje: Kişisel hakkımda sayfası", xp:70}
-  ]},
-  { week:1, day:6, title:"Hafta Sonu Projesi", emoji:"🎨", tasks:[
-    {id:"w1d6t1", text:"Bu haftanın en zor konusunu tekrar çalış", xp:20},
-    {id:"w1d6t2", text:"CodePen'de serbest deney yap", xp:25},
-    {id:"w1d6t3", text:"Haftanın öğrenmelerini özetle", xp:15}
-  ], extra:[
-    {id:"w1d6e1", text:"MDN'de HTML referansına göz at", xp:25},
-    {id:"w1d6e2", text:"Favori bir web sitesinin HTML koduna bak (sağ tık → İncele)", xp:35}
-  ], project:[
-    {id:"w1d6p1", text:"Bu haftaki projeyi GitHub'a yükle", xp:80}
-  ]},
-  { week:1, day:7, title:"Dinlenme & Tekrar", emoji:"😌", tasks:[
-    {id:"w1d7t1", text:"Bu haftanın notlarını oku", xp:15},
-    {id:"w1d7t2", text:"Öğrendiğin 5 HTML etiketini yaz", xp:15},
-    {id:"w1d7t3", text:"Gelecek hafta ne öğreneceğine bak (CSS!)", xp:10}
-  ], extra:[
-    {id:"w1d7e1", text:"YouTube'da HTML özet videosu izle", xp:25}
-  ], project:[
-    {id:"w1d7p1", text:"Haftanın en iyi öğrendiğin şeyi birine anlat", xp:30}
-  ]},
-  // Hafta 2
-  { week:2, day:1, title:"CSS'e Giriş", emoji:"🎨", tasks:[
-    {id:"w2d1t1", text:"FreeCodeCamp'te CSS dersine başla", xp:20},
-    {id:"w2d1t2", text:"İlk <style> etiketini yaz, renk değiştir", xp:25},
-    {id:"w2d1t3", text:"CSS nedir? Notlarına yaz", xp:15}
-  ], extra:[
-    {id:"w2d1e1", text:"color ve background-color özelliklerini dene", xp:30},
-    {id:"w2d1e2", text:"font-size ve font-family değiştir", xp:30}
-  ], project:[
-    {id:"w2d1p1", text:"Dün yaptığın HTML sayfasına CSS ekle", xp:55}
-  ]},
-  { week:2, day:2, title:"CSS Seçiciler", emoji:"🎯", tasks:[
-    {id:"w2d2t1", text:"FreeCodeCamp CSS seçici dersini tamamla", xp:20},
-    {id:"w2d2t2", text:"class ve id seçicilerini öğren", xp:25},
-    {id:"w2d2t3", text:"3 farklı seçici kullan", xp:20}
-  ], extra:[
-    {id:"w2d2e1", text:"Pseudo-class :hover efekti ekle", xp:35},
-    {id:"w2d2e2", text:"CSS dosyasını ayrı bir .css dosyasına taşı", xp:30}
-  ], project:[
-    {id:"w2d2p1", text:"Renkli ve stilize bir navigasyon menüsü yap", xp:60}
-  ]},
+  {week:1,day:1,title:"HTML'e Giriş",emoji:"🌱",
+   tasks:[
+     {id:"w1d1t1",text:"FreeCodeCamp'te ilk HTML dersini tamamla",xp:20},
+     {id:"w1d1t2",text:"CodePen'de ilk <h1> ve <p> etiketlerini yaz",xp:25},
+     {id:"w1d1t3",text:"Bugün öğrendiklerini Notlar sekmesine yaz",xp:15}
+   ],
+   extra:[
+     {id:"w1d1e1",text:"<a href> ile link ekle, <img src> ile görsel ekle",xp:30},
+     {id:"w1d1e2",text:"<ul> ve <li> ile liste yap",xp:25}
+   ],
+   project:[{id:"w1d1p1",text:"Adını ve hobilerini gösteren mini HTML sayfası yap",xp:50}]
+  },
+  {week:1,day:2,title:"HTML Yapısı",emoji:"🏗️",
+   tasks:[
+     {id:"w1d2t1",text:"FreeCodeCamp'te bugünkü adımları tamamla",xp:20},
+     {id:"w1d2t2",text:"<head>, <body>, <title> etiketlerini öğren ve yaz",xp:25},
+     {id:"w1d2t3",text:"Tam bir HTML dosyasını sıfırdan yaz",xp:20}
+   ],
+   extra:[
+     {id:"w1d2e1",text:"<div> ve <span> arasındaki farkı öğren, dene",xp:30},
+     {id:"w1d2e2",text:"HTML yorum satırı <!-- --> kullan",xp:20}
+   ],
+   project:[{id:"w1d2p1",text:"Dünkü sayfana link ve görsel ekle, GitHub'a yükle",xp:55}]
+  },
+  {week:1,day:3,title:"Linkler & Görseller",emoji:"🔗",
+   tasks:[
+     {id:"w1d3t1",text:"FreeCodeCamp link ve görsel derslerini yap",xp:20},
+     {id:"w1d3t2",text:"<a href='...' target='_blank'> ile dış link ekle",xp:25},
+     {id:"w1d3t3",text:"Bir görseli sayfana ekle, alt text yaz",xp:20}
+   ],
+   extra:[
+     {id:"w1d3e1",text:"Görsel boyutunu width ve height ile ayarla",xp:25},
+     {id:"w1d3e2",text:"Favori 3 web sitene link veren bir sayfa yap",xp:35}
+   ],
+   project:[{id:"w1d3p1",text:"Bir 'linkler' sayfası yap: 5 farklı site ve açıklamaları",xp:55}]
+  },
+  {week:1,day:4,title:"Listeler & Tablolar",emoji:"📋",
+   tasks:[
+     {id:"w1d4t1",text:"FreeCodeCamp liste dersini tamamla",xp:20},
+     {id:"w1d4t2",text:"<ul> sırasız ve <ol> sıralı liste yap",xp:25},
+     {id:"w1d4t3",text:"Basit bir <table> oluştur",xp:20}
+   ],
+   extra:[
+     {id:"w1d4e1",text:"<form>, <input>, <button> etiketlerini dene",xp:35},
+     {id:"w1d4e2",text:"Tabloya <thead> ve <tbody> ekle",xp:25}
+   ],
+   project:[{id:"w1d4p1",text:"Haftalık programını gösteren bir tablo yap",xp:60}]
+  },
+  {week:1,day:5,title:"Semantic HTML",emoji:"🧱",
+   tasks:[
+     {id:"w1d5t1",text:"Semantic HTML nedir? FreeCodeCamp'te öğren",xp:20},
+     {id:"w1d5t2",text:"<header>, <main>, <footer>, <nav> kullan",xp:25},
+     {id:"w1d5t3",text:"<section> ve <article> arasındaki farkı öğren",xp:20}
+   ],
+   extra:[
+     {id:"w1d5e1",text:"<aside> nedir? Bir sayfa yapısı kur",xp:30},
+     {id:"w1d5e2",text:"Bir web sitesinin HTML yapısını incele (sağ tık → İncele)",xp:35}
+   ],
+   project:[{id:"w1d5p1",text:"Semantic etiketlerle tam bir sayfa yapısı kur",xp:65}]
+  },
+  {week:1,day:6,title:"HTML Tekrar & Proje",emoji:"🎨",
+   tasks:[
+     {id:"w1d6t1",text:"Bu haftanın tüm etiketlerini gözden geçir",xp:15},
+     {id:"w1d6t2",text:"CodePen'de serbest deney yap",xp:20},
+     {id:"w1d6t3",text:"Haftanın özet notunu yaz",xp:15}
+   ],
+   extra:[
+     {id:"w1d6e1",text:"MDN HTML referansına göz at",xp:25},
+     {id:"w1d6e2",text:"Başka bir kişinin CodePen projesine bak",xp:20}
+   ],
+   project:[{id:"w1d6p1",text:"Kişisel 'Hakkımda' sayfası yap ve GitHub'a yükle",xp:80}]
+  },
+  {week:1,day:7,title:"Dinlenme & Tekrar",emoji:"😌",
+   tasks:[
+     {id:"w1d7t1",text:"Bu haftanın notlarını oku",xp:10},
+     {id:"w1d7t2",text:"Öğrendiğin 5 HTML etiketini yaz",xp:15},
+     {id:"w1d7t3",text:"Gelecek hafta konusuna bak: CSS!",xp:10}
+   ],
+   extra:[
+     {id:"w1d7e1",text:"CSS nedir? Kısaca araştır",xp:20}
+   ],
+   project:[{id:"w1d7p1",text:"Bu haftaki en iyi projeyi paylaş veya ekran görüntüsü al",xp:30}]
+  },
+  {week:2,day:1,title:"CSS'e Giriş",emoji:"🎨",
+   tasks:[
+     {id:"w2d1t1",text:"FreeCodeCamp'te CSS dersine başla",xp:20},
+     {id:"w2d1t2",text:"<style> ile color ve background-color değiştir",xp:25},
+     {id:"w2d1t3",text:"CSS'i notlarına yaz",xp:15}
+   ],
+   extra:[
+     {id:"w2d1e1",text:"font-size, font-family, font-weight özelliklerini dene",xp:30},
+     {id:"w2d1e2",text:"text-align ve text-decoration kullan",xp:25}
+   ],
+   project:[{id:"w2d1p1",text:"HTML sayfana CSS ekle, renkli ve güzel yap",xp:55}]
+  },
+  {week:2,day:2,title:"CSS Seçiciler",emoji:"🎯",
+   tasks:[
+     {id:"w2d2t1",text:"FreeCodeCamp CSS seçici dersini bitir",xp:20},
+     {id:"w2d2t2",text:"class (.isim) ve id (#isim) seçicilerini öğren",xp:25},
+     {id:"w2d2t3",text:"3 farklı seçici kullanarak stil ver",xp:20}
+   ],
+   extra:[
+     {id:"w2d2e1",text:":hover pseudo-class ile fare efekti ekle",xp:35},
+     {id:"w2d2e2",text:"CSS'i ayrı bir dosyaya taşı: style.css",xp:30}
+   ],
+   project:[{id:"w2d2p1",text:"Stilize bir navigasyon menüsü yap",xp:60}]
+  },
+  {week:2,day:3,title:"CSS Kutu Modeli",emoji:"📦",
+   tasks:[
+     {id:"w2d3t1",text:"Box model nedir? FreeCodeCamp'te öğren",xp:20},
+     {id:"w2d3t2",text:"margin, padding, border kullan",xp:25},
+     {id:"w2d3t3",text:"width ve height ayarla",xp:20}
+   ],
+   extra:[
+     {id:"w2d3e1",text:"box-sizing: border-box neden önemli? Dene",xp:30},
+     {id:"w2d3e2",text:"border-radius ile yuvarlak köşeler yap",xp:25}
+   ],
+   project:[{id:"w2d3p1",text:"Kart (card) tasarımı yap: resim + başlık + metin",xp:65}]
+  },
+  {week:2,day:4,title:"CSS Flexbox",emoji:"📐",
+   tasks:[
+     {id:"w2d4t1",text:"Flexbox nedir? FreeCodeCamp'te öğren",xp:20},
+     {id:"w2d4t2",text:"display:flex ve justify-content kullan",xp:25},
+     {id:"w2d4t3",text:"align-items ile dikey hizalama yap",xp:20}
+   ],
+   extra:[
+     {id:"w2d4e1",text:"flex-wrap ile satır kırma yap",xp:30},
+     {id:"w2d4e2",text:"flex-direction: column dene",xp:25}
+   ],
+   project:[{id:"w2d4p1",text:"Flexbox ile 3 kolonlu bir kart grid'i yap",xp:70}]
+  },
+  {week:2,day:5,title:"CSS Responsive",emoji:"📱",
+   tasks:[
+     {id:"w2d5t1",text:"Responsive tasarım nedir? Öğren",xp:20},
+     {id:"w2d5t2",text:"meta viewport etiketini ekle",xp:15},
+     {id:"w2d5t3",text:"Media query (@media) ile mobil stil yaz",xp:25}
+   ],
+   extra:[
+     {id:"w2d5e1",text:"Mobilde farklı, masaüstünde farklı renk yap",xp:35},
+     {id:"w2d5e2",text:"Chrome DevTools'ta mobil görünümü test et",xp:30}
+   ],
+   project:[{id:"w2d5p1",text:"Hem telefon hem bilgisayarda güzel görünen sayfa yap",xp:75}]
+  },
+  {week:2,day:6,title:"CSS Tekrar & Proje",emoji:"✨",
+   tasks:[
+     {id:"w2d6t1",text:"Bu haftanın CSS konularını gözden geçir",xp:15},
+     {id:"w2d6t2",text:"CodePen'de yeni bir tasarım dene",xp:20},
+     {id:"w2d6t3",text:"Haftanın notlarını yaz",xp:15}
+   ],
+   extra:[
+     {id:"w2d6e1",text:"CSS gradient background ekle",xp:25},
+     {id:"w2d6e2",text:"CSS transition ile animasyon yap",xp:35}
+   ],
+   project:[{id:"w2d6p1",text:"Portfolio sayfana CSS ekle ve GitHub'a yükle",xp:85}]
+  },
+  {week:2,day:7,title:"Dinlenme & Tekrar",emoji:"🌙",
+   tasks:[
+     {id:"w2d7t1",text:"Bu haftanın notlarını oku",xp:10},
+     {id:"w2d7t2",text:"En beğendiğin CSS özelliğini yaz",xp:15},
+     {id:"w2d7t3",text:"Gelecek haftaya bak: JavaScript!",xp:10}
+   ],
+   extra:[
+     {id:"w2d7e1",text:"CSS Grid nedir? Kısaca araştır",xp:25}
+   ],
+   project:[{id:"w2d7p1",text:"2 haftalık ilerlemeyi değerlendir, not al",xp:35}]
+  },
 ];
 
 // ── BAŞLANGIÇ TARİHİ ─────────────────────────────────────────
-// İlk gün 8 Haziran 2025 olarak ayarlıyoruz (kullanıcının başladığı gün)
-const START_DATE = new Date('2025-06-08T00:00:00+03:00');
+// Gün 1 = 8 Haziran 2026 (Türkiye saati)
+const START_STR = '2026-06-08';
 
-function getTurkeyDate() {
-  return new Date(new Date().toLocaleString('en-US', {timeZone:'Europe/Istanbul'}));
+function getTRDate() {
+  const now = new Date();
+  const tr = new Date(now.toLocaleString('en-US', {timeZone:'Europe/Istanbul'}));
+  return tr;
 }
 
-function getCurrentDayIndex() {
-  const now = getTurkeyDate();
-  const start = new Date(START_DATE.toLocaleString('en-US', {timeZone:'Europe/Istanbul'}));
-  start.setHours(0,0,0,0);
-  now.setHours(0,0,0,0);
-  const diff = Math.floor((now - start) / (1000*60*60*24));
+function daysBetween(d1, d2) {
+  const a = new Date(d1); a.setHours(0,0,0,0);
+  const b = new Date(d2); b.setHours(0,0,0,0);
+  return Math.round((b - a) / 86400000);
+}
+
+function getCurrentDayIdx() {
+  const now = getTRDate();
+  const todayStr = now.toISOString().slice(0,10);
+  const diff = daysBetween(START_STR, todayStr);
   return Math.max(0, Math.min(diff, PLAN.length - 1));
 }
 
-function getCurrentPlan() {
-  return PLAN[getCurrentDayIndex()];
-}
-
 // ── HAFTA ŞERİDİ ─────────────────────────────────────────────
-const DAYS = ['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'];
+const WDAYS = ['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'];
+
 function buildWeek() {
   const strip = document.getElementById('week-strip');
   const doneDays = JSON.parse(localStorage.getItem('doneDays') || '[]');
-  const todayIdx = getTurkeyDate().getDay();
-  const todayStrip = todayIdx === 0 ? 6 : todayIdx - 1;
-  strip.innerHTML = DAYS.map((d, i) => {
+  const tr = getTRDate();
+  const jsDay = tr.getDay();
+  const todayStrip = jsDay === 0 ? 6 : jsDay - 1;
+  strip.innerHTML = WDAYS.map((d,i) => {
     const done = doneDays.includes(i);
     const isToday = i === todayStrip;
     return `<div class="day-item">
@@ -377,33 +454,100 @@ function buildWeek() {
   }).join('');
 }
 
-// ── GÖREV KARTLARI ───────────────────────────────────────────
-function buildTaskCard(containerId, taskList, colorClass) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  const tasks = JSON.parse(localStorage.getItem('tasks') || '{}');
-  container.innerHTML = taskList.map(t => {
-    const done = tasks[t.id];
-    return `<div class="task-item" onclick="toggleTask(this,'${t.id}',${t.xp})">
+// ── GÖREV RENDER ─────────────────────────────────────────────
+function renderTaskCard(containerId, tasks, colorClass) {
+  const el = document.getElementById(containerId);
+  if (!el || !tasks || tasks.length === 0) { if(el) el.innerHTML = ''; return; }
+  const saved = JSON.parse(localStorage.getItem('tasks') || '{}');
+  el.innerHTML = tasks.map(t => {
+    const done = !!saved[t.id];
+    return `<div class="task-item" onclick="toggleTask('${t.id}',${t.xp})">
       <div class="check ${done?'done'}" id="chk-${t.id}">${done?'✓':''}</div>
       <div class="task-txt ${done?'done'}" id="txt-${t.id}">${t.text}</div>
-      <div class="task-xp ${colorClass}">+${t.xp} XP</div>
+      <div class="xp-tag ${colorClass}">+${t.xp} XP</div>
     </div>`;
   }).join('');
 }
 
 function renderDay() {
-  const plan = getCurrentPlan();
+  const idx = getCurrentDayIdx();
+  const plan = PLAN[idx];
+  if (!plan) return;
+
   document.getElementById('day-title').textContent = `Hafta ${plan.week}, Gün ${plan.day}`;
   document.getElementById('day-sub').textContent = plan.title;
   document.getElementById('day-emoji').textContent = plan.emoji;
-  buildTaskCard('daily-tasks-card', plan.tasks, '');
-  buildTaskCard('extra-tasks-card', plan.extra, 'pink');
-  buildTaskCard('project-tasks-card', plan.project, 'green');
+
+  renderTaskCard('daily-card', plan.tasks, 'xp-purple');
+  renderTaskCard('extra-card', plan.extra, 'xp-pink');
+  renderTaskCard('project-card', plan.project, 'xp-green');
   checkUnlock();
 }
 
-// ── XP & DURUM ───────────────────────────────────────────────
+function checkUnlock() {
+  const idx = getCurrentDayIdx();
+  const plan = PLAN[idx];
+  if (!plan) return;
+  const saved = JSON.parse(localStorage.getItem('tasks') || '{}');
+  const allDone = plan.tasks.every(t => !!saved[t.id]);
+  document.getElementById('unlock-banner').classList.toggle('show', allDone);
+  document.getElementById('extra-wrap').classList.toggle('show', allDone);
+}
+
+// ── GEÇMİŞ GÜNLER ────────────────────────────────────────────
+function renderPast() {
+  const idx = getCurrentDayIdx();
+  const container = document.getElementById('past-list');
+  if (idx === 0) {
+    container.innerHTML = '<p style="color:var(--muted);font-size:13px;text-align:center;padding:20px 0">Henüz geçmiş gün yok — yarın görünecek!</p>';
+    return;
+  }
+  const saved = JSON.parse(localStorage.getItem('tasks') || '{}');
+  let html = '';
+  for (let i = 0; i < idx; i++) {
+    const p = PLAN[i];
+    const done = p.tasks.filter(t => saved[t.id]).length;
+    const total = p.tasks.length;
+    html += `<div class="past-day" onclick="openPastModal(${i})">
+      <div class="past-badge">H${p.week}G${p.day}</div>
+      <div><div class="past-name">${p.emoji} ${p.title}</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:2px">${done}/${total} görev tamamlandı</div></div>
+      <div class="past-arrow">›</div>
+    </div>`;
+  }
+  container.innerHTML = html;
+}
+
+function openPastModal(idx) {
+  const plan = PLAN[idx];
+  const saved = JSON.parse(localStorage.getItem('tasks') || '{}');
+  document.getElementById('modal-title').textContent = `${plan.emoji} Hafta ${plan.week}, Gün ${plan.day} — ${plan.title}`;
+  
+  const allTasks = [
+    ...plan.tasks.map(t => ({...t, color:'xp-purple'})),
+    ...plan.extra.map(t => ({...t, color:'xp-pink'})),
+    ...plan.project.map(t => ({...t, color:'xp-green'}))
+  ];
+  
+  document.getElementById('modal-body').innerHTML = allTasks.map(t => {
+    const done = !!saved[t.id];
+    return `<div style="display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--border);">
+      <div style="width:22px;height:22px;border-radius:50%;background:${done?'var(--accent3)':'var(--surface2)'};border:2px solid ${done?'var(--accent3)':'var(--border2)'};display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;flex-shrink:0">${done?'✓':''}</div>
+      <div style="flex:1;font-size:13px;color:${done?'var(--muted)':'var(--text)'};${done?'text-decoration:line-through':''}">${t.text}</div>
+      <div class="xp-tag ${t.color}">+${t.xp} XP</div>
+    </div>`;
+  }).join('');
+  
+  document.getElementById('modal').classList.add('show');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modal')) {
+    document.getElementById('modal').classList.remove('show');
+  }
+}
+
+// ── XP & İSTATİSTİK ──────────────────────────────────────────
 function loadStats() {
   const xp = parseInt(localStorage.getItem('xp') || '0');
   const streak = parseInt(localStorage.getItem('streak') || '0');
@@ -418,55 +562,46 @@ function loadStats() {
   document.getElementById('s-xp').textContent = xp;
 }
 
-function checkUnlock() {
-  const plan = getCurrentPlan();
-  const tasks = JSON.parse(localStorage.getItem('tasks') || '{}');
-  const allDone = plan.tasks.every(t => tasks[t.id]);
-  document.getElementById('unlock-banner').classList.toggle('show', allDone);
-  document.getElementById('extra-tasks').classList.toggle('unlocked', allDone);
-}
-
-function toggleTask(el, id, pts) {
-  const chk = document.getElementById('chk-' + id);
-  const txt = document.getElementById('txt-' + id);
-  const tasks = JSON.parse(localStorage.getItem('tasks') || '{}');
+function toggleTask(id, pts) {
+  const saved = JSON.parse(localStorage.getItem('tasks') || '{}');
   let xp = parseInt(localStorage.getItem('xp') || '0');
   let totalDone = parseInt(localStorage.getItem('totalDone') || '0');
+  const chk = document.getElementById('chk-' + id);
+  const txt = document.getElementById('txt-' + id);
 
-  if (tasks[id]) {
-    tasks[id] = false;
-    chk.classList.remove('done'); chk.textContent = '';
+  if (saved[id]) {
+    saved[id] = false;
+    if (chk) { chk.classList.remove('done'); chk.textContent = ''; }
     if (txt) txt.classList.remove('done');
     xp = Math.max(0, xp - pts);
     totalDone = Math.max(0, totalDone - 1);
     showToast('-' + pts + ' XP');
   } else {
-    tasks[id] = true;
-    chk.classList.add('done'); chk.textContent = '✓';
+    saved[id] = true;
+    if (chk) { chk.classList.add('done'); chk.textContent = '✓'; }
     if (txt) txt.classList.add('done');
-    xp += pts; totalDone += 1;
+    xp += pts; totalDone++;
     showToast('+' + pts + ' XP kazandın! 🎉');
     if (pts >= 50) confetti();
-    // Seriyi güncelle
-    const now = getTurkeyDate();
-    const todayIdx = now.getDay() === 0 ? 6 : now.getDay() - 1;
+    const tr = getTRDate();
+    const todayStrip = tr.getDay() === 0 ? 6 : tr.getDay() - 1;
     const doneDays = JSON.parse(localStorage.getItem('doneDays') || '[]');
-    if (!doneDays.includes(todayIdx)) {
-      doneDays.push(todayIdx);
+    if (!doneDays.includes(todayStrip)) {
+      doneDays.push(todayStrip);
       localStorage.setItem('doneDays', JSON.stringify(doneDays));
       localStorage.setItem('streak', doneDays.length);
       buildWeek();
     }
   }
 
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorage.setItem('tasks', JSON.stringify(saved));
   localStorage.setItem('xp', xp);
   localStorage.setItem('totalDone', totalDone);
   loadStats();
   checkUnlock();
 }
 
-// ── DİĞER FONKSİYONLAR ──────────────────────────────────────
+// ── DİĞER ────────────────────────────────────────────────────
 function togglePhase(h) { h.nextElementSibling.classList.toggle('open'); }
 
 function switchTab(name, btn) {
@@ -474,15 +609,17 @@ function switchTab(name, btn) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   if (btn) btn.classList.add('active');
+  if (name === 'gecmis') renderPast();
 }
 
 function switchNav(name) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('nav-' + name).classList.add('active');
-  const names = ['bugun','harita','araclar','notlar'];
+  const names = ['bugun','gecmis','harita','notlar'];
   document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', names[i]===name));
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
+  if (name === 'gecmis') renderPast();
 }
 
 function saveNote() {
@@ -490,7 +627,7 @@ function saveNote() {
   if (!txt) return;
   const notes = JSON.parse(localStorage.getItem('notes') || '[]');
   const now = new Date();
-  notes.unshift({ text: txt, date: now.toLocaleDateString('tr-TR') + ' ' + now.toLocaleTimeString('tr-TR', {hour:'2-digit',minute:'2-digit'}) });
+  notes.unshift({text:txt, date:now.toLocaleDateString('tr-TR')+' '+now.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})});
   localStorage.setItem('notes', JSON.stringify(notes));
   document.getElementById('note-input').value = '';
   renderNotes();
@@ -515,7 +652,7 @@ function confetti() {
   const colors = ['#6c63ff','#ff6b9d','#00c48c','#ffd700','#ff9500'];
   for (let i = 0; i < 35; i++) {
     const el = document.createElement('div');
-    el.className = 'confetti-piece';
+    el.className = 'cp';
     el.style.cssText = `left:${Math.random()*100}vw;top:-10px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${1.2+Math.random()*2}s;animation-delay:${Math.random()*0.6}s;`;
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 3500);
