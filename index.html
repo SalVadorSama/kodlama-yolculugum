@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serkut — Kod Yolculuğu</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --surface2: #1a1a26;
+  --border: rgba(255,255,255,0.08);
+  --accent: #7c6fff;
+  --accent2: #ff6b9d;
+  --accent3: #00e5a0;
+  --text: #f0f0f8;
+  --muted: #6b6b8a;
+  --mono: 'Space Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  padding-bottom: 100px;
+}
+
+/* GRID BG */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(124,111,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,111,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container { max-width: 480px; margin: 0 auto; padding: 0 16px; position: relative; z-index: 1; }
+
+/* HEADER */
+.header {
+  padding: 32px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: .05em;
+}
+.logo span { color: var(--muted); }
+.level-badge {
+  background: var(--surface2);
+  border: 0.5px solid var(--border);
+  border-radius: 99px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-family: var(--mono);
+  color: var(--accent3);
+}
+
+/* XP BAR */
+.xp-section { margin-bottom: 24px; }
+.xp-top { display: flex; justify-content: space-between; margin-bottom: 8px; }
+.xp-label { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+.xp-val { font-size: 12px; color: var(--accent); font-family: var(--mono); }
+.xp-track {
+  height: 4px;
+  background: var(--surface2);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.xp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 99px;
+  transition: width 0.8s cubic-bezier(.4,0,.2,1);
+}
+
+/* STAT ROW */
+.stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+.stat {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 12px;
+  text-align: center;
+  transition: border-color .2s;
+}
+.stat:hover { border-color: rgba(124,111,255,0.3); }
+.stat-num { font-size: 26px; font-weight: 600; color: var(--text); line-height: 1; }
+.stat-num.accent { color: var(--accent); }
+.stat-num.green { color: var(--accent3); }
+.stat-num.pink { color: var(--accent2); }
+.stat-lbl { font-size: 11px; color: var(--muted); margin-top: 4px; font-family: var(--mono); }
+
+/* SECTION */
+.section-label {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--muted);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* WEEK STRIP */
+.week-strip { display: flex; justify-content: space-between; margin-bottom: 24px; }
+.day-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.day-circle {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--muted);
+  transition: all .2s;
+}
+.day-circle.done { background: var(--accent3); border-color: var(--accent3); color: #000; font-weight: 700; }
+.day-circle.today { border-color: var(--accent); color: var(--accent); }
+.day-lbl { font-size: 10px; color: var(--muted); font-family: var(--mono); }
+
+/* TABS */
+.tabs { display: flex; gap: 4px; background: var(--surface); border-radius: 10px; padding: 4px; margin-bottom: 20px; border: 0.5px solid var(--border); }
+.tab {
+  flex: 1; padding: 8px 4px;
+  text-align: center;
+  font-size: 12px;
+  font-family: var(--mono);
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  transition: all .2s;
+}
+.tab.active { background: var(--surface2); color: var(--text); border: 0.5px solid var(--border); }
+
+/* TASK CARD */
+.task-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.task-head {
+  padding: 12px 16px;
+  border-bottom: 0.5px solid var(--border);
+  font-size: 13px;
+  color: var(--muted);
+  font-family: var(--mono);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.task-head .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 0.5px solid var(--border);
+  cursor: pointer;
+  transition: background .15s;
+}
+.task-item:last-child { border-bottom: none; }
+.task-item:hover { background: var(--surface2); }
+.check {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+  font-size: 12px;
+}
+.check.done { background: var(--accent3); border-color: var(--accent3); color: #000; }
+.task-txt { flex: 1; font-size: 13px; color: var(--text); line-height: 1.5; }
+.task-txt.done { color: var(--muted); text-decoration: line-through; }
+.task-xp { font-size: 11px; font-family: var(--mono); color: var(--accent); white-space: nowrap; }
+
+/* PHASE CARDS */
+.phase {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.phase-h {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.phase-h:hover { background: var(--surface2); }
+.phase-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.phase-name { flex: 1; font-size: 13px; font-weight: 500; }
+.phase-tag {
+  font-size: 10px;
+  font-family: var(--mono);
+  padding: 3px 8px;
+  border-radius: 99px;
+  border: 0.5px solid;
+}
+.phase-body { display: none; padding: 0 16px 14px; border-top: 0.5px solid var(--border); }
+.phase-body.open { display: block; }
+.week-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--border); }
+.week-item:last-child { border-bottom: none; }
+.week-n { font-size: 11px; font-family: var(--mono); color: var(--muted); min-width: 60px; padding-top: 2px; }
+.week-t { font-size: 13px; color: var(--text); line-height: 1.5; }
+.phase-win { margin-top: 10px; font-size: 12px; font-family: var(--mono); color: var(--accent3); }
+
+/* TOOL CARDS */
+.tool {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+.tool:hover { border-color: rgba(124,111,255,0.4); background: var(--surface2); }
+.tool-ico { font-size: 22px; width: 36px; text-align: center; flex-shrink: 0; }
+.tool-name { font-size: 14px; font-weight: 500; color: var(--text); }
+.tool-desc { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.tool-arrow { color: var(--muted); font-size: 16px; margin-left: auto; }
+
+/* NOTES */
+.note-area {
+  width: 100%;
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 13px;
+  resize: none;
+  height: 120px;
+  margin-bottom: 8px;
+  outline: none;
+  line-height: 1.6;
+}
+.note-area:focus { border-color: rgba(124,111,255,0.4); }
+.note-area::placeholder { color: var(--muted); }
+.save-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--surface2);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all .2s;
+  letter-spacing: .05em;
+}
+.save-btn:hover { background: rgba(124,111,255,0.1); border-color: rgba(124,111,255,0.4); }
+.save-btn:active { transform: scale(.98); }
+.saved-notes { margin-top: 12px; }
+.note-entry {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.6;
+}
+.note-date { font-size: 10px; font-family: var(--mono); color: var(--muted); margin-bottom: 4px; }
+
+/* BOTTOM NAV */
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(10,10,15,0.95);
+  backdrop-filter: blur(12px);
+  border-top: 0.5px solid var(--border);
+  display: flex;
+  padding: 8px 0 20px;
+  z-index: 100;
+}
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 8px 0;
+  transition: opacity .2s;
+}
+.nav-ico { font-size: 20px; color: var(--muted); transition: color .2s; }
+.nav-lbl { font-size: 10px; font-family: var(--mono); color: var(--muted); transition: color .2s; }
+.nav-item.active .nav-ico,
+.nav-item.active .nav-lbl { color: var(--accent); }
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--accent3);
+  color: #000;
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 10px 20px;
+  border-radius: 99px;
+  opacity: 0;
+  transition: all .3s;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 200;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* TABS CONTENT */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* CONFETTI */
+@keyframes fall {
+  to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+.confetti-piece {
+  position: fixed;
+  width: 8px; height: 8px;
+  border-radius: 2px;
+  animation: fall linear forwards;
+  pointer-events: none;
+  z-index: 300;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="logo">serkut<span>/kod</span></div>
+    <div class="level-badge" id="level-badge">LVL 1</div>
+  </div>
+
+  <div class="xp-section">
+    <div class="xp-top">
+      <span class="xp-label">// deneyim puanı</span>
+      <span class="xp-val" id="xp-text">0 / 100 XP</span>
+    </div>
+    <div class="xp-track"><div class="xp-fill" id="xp-fill" style="width:0%"></div></div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat">
+      <div class="stat-num accent" id="s-streak">0</div>
+      <div class="stat-lbl">🔥 seri</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num green" id="s-done">0</div>
+      <div class="stat-lbl">✓ görev</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num pink" id="s-xp">0</div>
+      <div class="stat-lbl">★ toplam xp</div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('bugun',this)">bugün</button>
+    <button class="tab" onclick="switchTab('harita',this)">harita</button>
+    <button class="tab" onclick="switchTab('araclar',this)">araçlar</button>
+    <button class="tab" onclick="switchTab('notlar',this)">notlar</button>
+  </div>
+
+  <!-- BUGÜN -->
+  <div class="tab-content active" id="tab-bugun">
+    <p class="section-label">// bu hafta</p>
+    <div class="week-strip" id="week-strip"></div>
+
+    <p class="section-label">// bugünün görevi</p>
+    <div class="task-card">
+      <div class="task-head"><div class="dot"></div> Hafta 1, Gün 1 — HTML nedir?</div>
+      <div class="task-item" onclick="toggleTask(this,20,'html-video')">
+        <div class="check" id="chk-html-video"></div>
+        <div class="task-txt" id="txt-html-video">FreeCodeCamp'te ilk dersi aç, HTML giriş videosunu izle (15 dk)</div>
+        <div class="task-xp">+20 XP</div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this,25,'html-kod')">
+        <div class="check" id="chk-html-kod"></div>
+        <div class="task-txt" id="txt-html-kod">İlk &lt;h1&gt; ve &lt;p&gt; etiketlerini CodePen'de yaz, gör</div>
+        <div class="task-xp">+25 XP</div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this,15,'html-not')">
+        <div class="check" id="chk-html-not"></div>
+        <div class="task-txt" id="txt-html-not">Bugün öğrendiklerini "Notlar" sekmesine yaz</div>
+        <div class="task-xp">+15 XP</div>
+      </div>
+    </div>
+
+    <div class="task-card">
+      <div class="task-head"><div class="dot" style="background:var(--accent2)"></div> Bonus görev (+50 XP)</div>
+      <div class="task-item" onclick="toggleTask(this,50,'bonus1')">
+        <div class="check" id="chk-bonus1"></div>
+        <div class="task-txt" id="txt-bonus1">Kendi adını ve bir hobini gösteren mini HTML sayfası yap</div>
+        <div class="task-xp">+50 XP</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HARITA -->
+  <div class="tab-content" id="tab-harita">
+    <p class="section-label">// 12 aylık yol haritası</p>
+
+    <div class="phase">
+      <div class="phase-h" onclick="togglePhase(this)">
+        <div class="phase-dot" style="background:var(--accent)"></div>
+        <div class="phase-name">Faz 1 — Temel</div>
+        <div class="phase-tag" style="color:var(--accent);border-color:rgba(124,111,255,0.3)">Şu an ◀</div>
+      </div>
+      <div class="phase-body open">
+        <div class="week-item"><div class="week-n">H. 1–2</div><div class="week-t">HTML: etiketler, linkler, görseller</div></div>
+        <div class="week-item"><div class="week-n">H. 3–4</div><div class="week-t">CSS: renkler, fontlar, kutu modeli</div></div>
+        <div class="week-item"><div class="week-n">H. 5–6</div><div class="week-t">CSS Flexbox, mobil uyumlu layout</div></div>
+        <div class="week-item"><div class="week-n">H. 7–8</div><div class="week-t">JavaScript giriş: değişkenler, koşullar</div></div>
+        <div class="week-item"><div class="week-n">H. 9–12</div><div class="week-t">JS fonksiyonlar, DOM manipülasyonu</div></div>
+        <div class="phase-win">🏆 Proje: Kişisel portfolio sitesi</div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-h" onclick="togglePhase(this)">
+        <div class="phase-dot" style="background:var(--accent3)"></div>
+        <div class="phase-name">Faz 2 — Derinleş (4–8. ay)</div>
+        <div class="phase-tag" style="color:var(--muted);border-color:var(--border)">kilitli</div>
+      </div>
+      <div class="phase-body">
+        <div class="week-item"><div class="week-n">Ay 4–5</div><div class="week-t">React: komponentler, state, props</div></div>
+        <div class="week-item"><div class="week-n">Ay 6</div><div class="week-t">Python giriş: oyun mantığı için</div></div>
+        <div class="week-item"><div class="week-n">Ay 7–8</div><div class="week-t">Git, GitHub, proje yönetimi</div></div>
+        <div class="phase-win">🏆 Proje: React web uygulaması</div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-h" onclick="togglePhase(this)">
+        <div class="phase-dot" style="background:var(--accent2)"></div>
+        <div class="phase-name">Faz 3 — Uzmanlaş (9–12. ay)</div>
+        <div class="phase-tag" style="color:var(--muted);border-color:var(--border)">kilitli</div>
+      </div>
+      <div class="phase-body">
+        <div class="week-item"><div class="week-n">Ay 9–10</div><div class="week-t">Unity / Pygame ile 2D oyun</div></div>
+        <div class="week-item"><div class="week-n">Ay 11</div><div class="week-t">React Native: iOS + Android uygulama</div></div>
+        <div class="week-item"><div class="week-n">Ay 12</div><div class="week-t">Backend: Node.js, API, veritabanı</div></div>
+        <div class="phase-win">🏆 Proje: Kendi seçtiğin büyük proje</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARAÇLAR -->
+  <div class="tab-content" id="tab-araclar">
+    <p class="section-label">// araçların</p>
+    <a class="tool" href="https://www.freecodecamp.org" target="_blank">
+      <div class="tool-ico">🎓</div>
+      <div><div class="tool-name">FreeCodeCamp</div><div class="tool-desc">Ana öğrenme platformun — ücretsiz</div></div>
+      <div class="tool-arrow">→</div>
+    </a>
+    <a class="tool" href="https://codepen.io" target="_blank">
+      <div class="tool-ico">✏️</div>
+      <div><div class="tool-name">CodePen</div><div class="tool-desc">Tarayıcıda anında kod yaz, gör</div></div>
+      <div class="tool-arrow">→</div>
+    </a>
+    <a class="tool" href="https://code.visualstudio.com" target="_blank">
+      <div class="tool-ico">💻</div>
+      <div><div class="tool-name">VS Code</div><div class="tool-desc">Profesyonel kod editörü — ücretsiz</div></div>
+      <div class="tool-arrow">→</div>
+    </a>
+    <a class="tool" href="https://github.com" target="_blank">
+      <div class="tool-ico">🐙</div>
+      <div><div class="tool-name">GitHub</div><div class="tool-desc">Projelerini sakla ve paylaş</div></div>
+      <div class="tool-arrow">→</div>
+    </a>
+    <a class="tool" href="https://developer.mozilla.org/tr" target="_blank">
+      <div class="tool-ico">📖</div>
+      <div><div class="tool-name">MDN Docs</div><div class="tool-desc">HTML/CSS/JS referansı — Türkçe</div></div>
+      <div class="tool-arrow">→</div>
+    </a>
+  </div>
+
+  <!-- NOTLAR -->
+  <div class="tab-content" id="tab-notlar">
+    <p class="section-label">// günlük notlar</p>
+    <textarea class="note-area" id="note-input" placeholder="Bugün ne öğrendin? Kafana takılan bir şey var mı? Buraya yaz..."></textarea>
+    <button class="save-btn" onclick="saveNote()">// notu kaydet →</button>
+    <div class="saved-notes" id="saved-notes"></div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <div class="nav-item active" id="nav-bugun" onclick="switchNav('bugun')">
+    <div class="nav-ico">⚡</div>
+    <div class="nav-lbl">bugün</div>
+  </div>
+  <div class="nav-item" id="nav-harita" onclick="switchNav('harita')">
+    <div class="nav-ico">🗺️</div>
+    <div class="nav-lbl">harita</div>
+  </div>
+  <div class="nav-item" id="nav-araclar" onclick="switchNav('araclar')">
+    <div class="nav-ico">🔧</div>
+    <div class="nav-lbl">araçlar</div>
+  </div>
+  <div class="nav-item" id="nav-notlar" onclick="switchNav('notlar')">
+    <div class="nav-ico">📝</div>
+    <div class="nav-lbl">notlar</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const DAYS = ['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'];
+const today = new Date().getDay();
+const todayIdx = today === 0 ? 6 : today - 1;
+
+function buildWeek() {
+  const strip = document.getElementById('week-strip');
+  const done = JSON.parse(localStorage.getItem('weekDone') || '[]');
+  strip.innerHTML = '';
+  DAYS.forEach((d, i) => {
+    const isDone = done.includes(i);
+    const isToday = i === todayIdx;
+    strip.innerHTML += `<div class="day-item">
+      <div class="day-circle ${isDone ? 'done' : isToday ? 'today' : ''}">${isDone ? '✓' : d}</div>
+      <div class="day-lbl">${d}</div>
+    </div>`;
+  });
+}
+
+function loadState() {
+  const xp = parseInt(localStorage.getItem('xp') || '0');
+  const streak = parseInt(localStorage.getItem('streak') || '0');
+  const totalDone = parseInt(localStorage.getItem('totalDone') || '0');
+  const lvl = Math.floor(xp / 100) + 1;
+  const lvlXp = xp % 100;
+  document.getElementById('xp-fill').style.width = lvlXp + '%';
+  document.getElementById('xp-text').textContent = lvlXp + ' / 100 XP';
+  document.getElementById('level-badge').textContent = 'LVL ' + lvl;
+  document.getElementById('s-streak').textContent = streak;
+  document.getElementById('s-done').textContent = totalDone;
+  document.getElementById('s-xp').textContent = xp;
+
+  const tasks = JSON.parse(localStorage.getItem('tasks') || '{}');
+  Object.keys(tasks).forEach(id => {
+    const chk = document.getElementById('chk-' + id);
+    const txt = document.getElementById('txt-' + id);
+    if (chk && tasks[id]) {
+      chk.classList.add('done');
+      chk.textContent = '✓';
+      if (txt) txt.classList.add('done');
+    }
+  });
+}
+
+function toggleTask(el, pts, id) {
+  const chk = document.getElementById('chk-' + id);
+  const txt = document.getElementById('txt-' + id);
+  const tasks = JSON.parse(localStorage.getItem('tasks') || '{}');
+  let xp = parseInt(localStorage.getItem('xp') || '0');
+  let totalDone = parseInt(localStorage.getItem('totalDone') || '0');
+
+  if (tasks[id]) {
+    tasks[id] = false;
+    chk.classList.remove('done');
+    chk.textContent = '';
+    if (txt) txt.classList.remove('done');
+    xp = Math.max(0, xp - pts);
+    totalDone = Math.max(0, totalDone - 1);
+    showToast('-' + pts + ' XP');
+  } else {
+    tasks[id] = true;
+    chk.classList.add('done');
+    chk.textContent = '✓';
+    if (txt) txt.classList.add('done');
+    xp += pts;
+    totalDone += 1;
+    showToast('+' + pts + ' XP kazandın! 🔥');
+    if (pts >= 50) confetti();
+    const weekDone = JSON.parse(localStorage.getItem('weekDone') || '[]');
+    if (!weekDone.includes(todayIdx)) {
+      weekDone.push(todayIdx);
+      localStorage.setItem('weekDone', JSON.stringify(weekDone));
+      localStorage.setItem('streak', weekDone.length);
+      buildWeek();
+    }
+  }
+
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorage.setItem('xp', xp);
+  localStorage.setItem('totalDone', totalDone);
+  loadState();
+}
+
+function togglePhase(header) {
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+function switchNav(name) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('nav-' + name).classList.add('active');
+  switchTab(name, null);
+  document.querySelectorAll('.tab').forEach((t, i) => {
+    const names = ['bugun','harita','araclar','notlar'];
+    t.classList.toggle('active', names[i] === name);
+  });
+}
+
+function saveNote() {
+  const txt = document.getElementById('note-input').value.trim();
+  if (!txt) return;
+  const notes = JSON.parse(localStorage.getItem('notes') || '[]');
+  const now = new Date();
+  notes.unshift({ text: txt, date: now.toLocaleDateString('tr-TR') + ' ' + now.toLocaleTimeString('tr-TR', {hour:'2-digit',minute:'2-digit'}) });
+  localStorage.setItem('notes', JSON.stringify(notes));
+  document.getElementById('note-input').value = '';
+  renderNotes();
+  showToast('Not kaydedildi ✓');
+}
+
+function renderNotes() {
+  const notes = JSON.parse(localStorage.getItem('notes') || '[]');
+  const container = document.getElementById('saved-notes');
+  container.innerHTML = notes.map(n => `
+    <div class="note-entry">
+      <div class="note-date">${n.date}</div>
+      ${n.text}
+    </div>
+  `).join('');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+function confetti() {
+  const colors = ['#7c6fff','#ff6b9d','#00e5a0','#ffd700'];
+  for (let i = 0; i < 30; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    el.style.cssText = `
+      left: ${Math.random()*100}vw;
+      top: -10px;
+      background: ${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration: ${1+Math.random()*2}s;
+      animation-delay: ${Math.random()*0.5}s;
+      transform: rotate(${Math.random()*360}deg);
+    `;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3000);
+  }
+}
+
+buildWeek();
+loadState();
+renderNotes();
+</script>
+</body>
+</html>
